@@ -4,8 +4,8 @@
     <Project Path="Core/ETicaret.Domain/ETicaret.Domain.csproj" />
     <Project Path="Core/ETicaret.Mapper/ETicaret.Mapper.csproj" Id="816bdf16-3990-4345-9b92-19716c53dafb" />
   </Folder>
-  <Folder Name="/Infrastructor/">
-    <Project Path="Infrastructor/ETicaret.Infrastructor/ETicaret.Infrastructor.csproj" />
+  <Folder Name="/Infrastructure/">
+    <Project Path="Infrastructor/ETicaret.Infrastructor/ETicaret.Infrastructure.csproj" />
     <Project Path="Infrastructor/ETicaret.Persistence/ETicaret.Persistence.csproj" />
   </Folder>
   <Folder Name="/Presentation/">
