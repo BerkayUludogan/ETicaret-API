@@ -1,5 +1,6 @@
 using ETicaret.API;
-
+using ETicaret.Application;
+using ETicaret.Mapper;
 
 
 
@@ -8,8 +9,8 @@ builder.Services.AddHttpContextAccessor();//Client'tan gelen request neticesinde
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.AppApi(builder.Configuration);
-
-
+builder.Services.AddApplicationServices();
+builder.Services.AddCustomMapper();
 
 builder.Services.AddControllers();
 #region Project Environments

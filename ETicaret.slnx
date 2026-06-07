@@ -2,6 +2,7 @@
   <Folder Name="/Core/">
     <Project Path="Core/ETicaret.Application/ETicaret.Application.csproj" />
     <Project Path="Core/ETicaret.Domain/ETicaret.Domain.csproj" />
+    <Project Path="Core/ETicaret.Mapper/ETicaret.Mapper.csproj" Id="816bdf16-3990-4345-9b92-19716c53dafb" />
   </Folder>
   <Folder Name="/Infrastructor/">
     <Project Path="Infrastructor/ETicaret.Infrastructor/ETicaret.Infrastructor.csproj" />

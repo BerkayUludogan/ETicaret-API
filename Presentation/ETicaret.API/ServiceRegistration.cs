@@ -18,7 +18,7 @@ namespace ETicaret.API
                 var webUrl = "http://OnionArcTemp.com";
                 gen.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "OnionArcSharpCommerce Web Api",
+                    Title = "ETicaret Web Api",
                     Version = "v1",
                     License = new OpenApiLicense
                     {

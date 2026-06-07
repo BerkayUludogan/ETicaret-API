@@ -17,5 +17,11 @@
 		<PackageReference Include="Serilog.Sinks.MSSqlServer" Version="10.0.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.1" />
 	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Core\ETicaret.Application\ETicaret.Application.csproj" />
+	  <ProjectReference Include="..\..\Core\ETicaret.Mapper\ETicaret.Mapper.csproj" />
+	  <ProjectReference Include="..\..\Infrastructor\ETicaret.Infrastructor\ETicaret.Infrastructor.csproj" />
+	  <ProjectReference Include="..\..\Infrastructor\ETicaret.Persistence\ETicaret.Persistence.csproj" />
+	</ItemGroup>
 
 </Project>

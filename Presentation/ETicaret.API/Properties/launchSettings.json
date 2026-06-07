@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "SharpCommerce.Development": {
+    "ETicaret.Development": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
@@ -10,7 +10,7 @@
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:7044"
     },
-    "SharpCommerce.Production": {
+    "ETicaret.Production": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
