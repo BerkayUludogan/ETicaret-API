@@ -12,15 +12,15 @@ namespace ETicaret.Infrastructor.Services.Token
     public class TokenService : ITokenService
     {
         private readonly TokenSettings _tokenSettings;
-        private readonly UserManager<AppUser> _userManager;
+        private readonly UserManager<AppUserEntity> _userManager;
 
-        public TokenService(UserManager<AppUser> userManager, TokenSettings tokenSettings)
+        public TokenService(UserManager<AppUserEntity> userManager, TokenSettings tokenSettings)
         {
             _userManager = userManager;
             _tokenSettings = tokenSettings;
         }
 
-        public async Task<Application.DTOs.Token> CreateAccessToken(AppUser user, IList<string> roles)
+        public async Task<Application.DTOs.Token> CreateAccessToken(AppUserEntity user, IList<string> roles)
         {
             Application.DTOs.Token token = new();
 

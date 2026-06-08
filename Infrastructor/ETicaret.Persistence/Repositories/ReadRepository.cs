@@ -10,9 +10,9 @@ namespace ETicaret.Persistence.Repositories
     public class ReadRepository<T> : IReadRepository<T> where T : BaseEntity, IEntityBase, new()
     {
 
-        private readonly DataContext _context;
+        private readonly ETicaretContext _context;
 
-        public ReadRepository(DataContext context)
+        public ReadRepository(ETicaretContext context)
         {
             _context = context;
         }
