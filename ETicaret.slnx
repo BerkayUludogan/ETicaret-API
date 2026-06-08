@@ -3,10 +3,12 @@
     <Project Path="Core/ETicaret.Application/ETicaret.Application.csproj" />
     <Project Path="Core/ETicaret.Domain/ETicaret.Domain.csproj" />
     <Project Path="Core/ETicaret.Mapper/ETicaret.Mapper.csproj" Id="816bdf16-3990-4345-9b92-19716c53dafb" />
+    <Project Path="Core/ETicaret.Models/ETicaret.Models.csproj" Id="9ad6ad6c-2800-4c55-8cd4-7e65ea833bfa" />
   </Folder>
   <Folder Name="/Infrastructure/">
     <Project Path="Infrastructor/ETicaret.Infrastructor/ETicaret.Infrastructure.csproj" />
     <Project Path="Infrastructor/ETicaret.Persistence/ETicaret.Persistence.csproj" />
+    <Project Path="Infrastructure/ETicaret.Redis/ETicaret.Redis.csproj" Id="4ae6b6d5-0779-4c8a-a410-713646d8e14c" />
   </Folder>
   <Folder Name="/Presentation/">
     <Project Path="Presentation/ETicaret.API/ETicaret.API.csproj" />

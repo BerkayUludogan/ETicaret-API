@@ -4,7 +4,7 @@ namespace ETicaret.Application.Abstractions.Token
 {
     public interface ITokenService
     {
-        Task<DTOs.Token> CreateAccessToken(AppUser user, IList<string> roles);
+        Task<DTOs.Token> CreateAccessToken(AppUserEntity user, IList<string> roles);
         string CreateRefreshToken();
     }
 }

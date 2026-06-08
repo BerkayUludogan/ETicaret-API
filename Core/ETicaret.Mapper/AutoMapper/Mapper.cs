@@ -1,55 +1,41 @@
 ﻿using AutoMapper;
-using AutoMapper.Internal;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace ETicaret.Mapper.AutoMapper
 {
     public class Mapper : Application.Abstractions.AutoMapper.IMapper
     {
-        public static List<TypePair> typePairs = new();
-        private IMapper _mapperContainer;
-        public TDestination Map<TDestination, TSource>(TSource source, string? ignore = null)
-        {
-            Config<TDestination, TSource>(5, ignore);
-            return _mapperContainer.Map<TDestination>(source);
-        }
+        private readonly IMapper _mapper;
 
-        public IList<TDestination> Map<TDestination, TSource>(IList<TSource> sources, string? ignore = null)
+        public Mapper()
         {
-            Config<TDestination, TSource>(5, ignore);
-            return _mapperContainer.Map<IList<TSource>, IList<TDestination>>(sources);
-        }
-
-        public TDestination Map<TDestination>(object source, string? ignore = null)
-        {
-            Config<TDestination, object>(5, ignore);
-            return _mapperContainer.Map<TDestination>(source);
-        }
-
-        public IList<TDestination> Map<TDestination>(IList<object> sources, string? ignore = null)
-        {
-            Config<TDestination, IList<object>>(5, ignore);
-            return _mapperContainer.Map<IList<TDestination>>(sources);
-        }
-        protected void Config<TDestination, TSource>(int depth = 5, string? ignore = null)
-        {
-            var typePair = new TypePair(typeof(TSource), typeof(TDestination));
-
-            if (typePairs.Any(a => a.DestinationType == typePair.DestinationType && a.SourceType == typePair.SourceType) && ignore is null)
-                return;
-
             var config = new MapperConfiguration(cfg =>
             {
-                foreach (var item in typePairs)
-                {
-                    if (ignore is not null)
-                        cfg.CreateMap(item.SourceType, item.DestinationType).MaxDepth(depth).ForMember(ignore, x => x.Ignore()).ReverseMap();
-                    else
-                        cfg.CreateMap(item.SourceType, item.DestinationType).MaxDepth(depth).ReverseMap();
-                }
-            }, NullLoggerFactory.Instance);
-            _mapperContainer = config.CreateMapper();
+                cfg.AddMaps(typeof(Mapper).Assembly); // Profil'leri otomatik yükler
 
+            }, NullLoggerFactory.Instance);
+
+            try
+            {
+                config.AssertConfigurationIsValid();// Validasyon yapılıyor mappingler doğru mu
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+            }
+            _mapper = config.CreateMapper();
         }
+
+        public TDestination Map<TDestination, TSource>(TSource source)
+            => _mapper.Map<TSource, TDestination>(source);
+
+        public IList<TDestination> Map<TDestination, TSource>(IList<TSource> sources)
+            => _mapper.Map<IList<TSource>, IList<TDestination>>(sources);
+
+        public TDestination Map<TDestination>(object source)
+            => _mapper.Map<TDestination>(source);
+
+        public TDestination Map<TSource, TDestination>(TSource source, TDestination destination)
+           => _mapper.Map(source, destination);
     }
 }

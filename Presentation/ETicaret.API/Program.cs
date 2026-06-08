@@ -13,6 +13,7 @@ builder.Services.AddApplicationServices();
 builder.Services.AddCustomMapper();
 
 builder.Services.AddControllers();
+
 #region Project Environments
 var env = builder.Environment;
 

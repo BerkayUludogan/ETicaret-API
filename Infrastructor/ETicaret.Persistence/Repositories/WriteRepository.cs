@@ -8,8 +8,8 @@ namespace ETicaret.Persistence.Repositories
 {
     public class WriteRepository<T> : IWriteRepository<T> where T : BaseEntity, IEntityBase, new()
     {
-        private readonly DataContext _context;
-        public WriteRepository(DataContext context)
+        private readonly ETicaretContext _context;
+        public WriteRepository(ETicaretContext context)
         {
             _context = context;
         }

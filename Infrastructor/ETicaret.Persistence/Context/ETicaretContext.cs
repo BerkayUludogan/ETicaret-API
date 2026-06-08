@@ -6,11 +6,11 @@ using System.Reflection;
 
 namespace ETicaret.Persistence.Context
 {
-    public class DataContext : IdentityDbContext<AppUser, AppRole, Guid>
+    public class ETicaretContext : IdentityDbContext<AppUserEntity, AppRoleEntity, Guid>
     {
-        public DataContext() { }
+        public ETicaretContext() { }
 
-        public DataContext(DbContextOptions<DataContext> options) : base(options) { }
+        public ETicaretContext(DbContextOptions<ETicaretContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -28,7 +28,7 @@ namespace ETicaret.Persistence.Context
                 _ = data.State switch
                 {
                     EntityState.Added => data.Entity.CreatedDate = DateTime.UtcNow,
-                    EntityState.Modified => data.Entity.UpdatedDate = DateTime.UtcNow,
+                    EntityState.Modified => data.Entity.ModifiedDate= DateTime.UtcNow,
                     _ => DateTime.Now,
                 };
             }

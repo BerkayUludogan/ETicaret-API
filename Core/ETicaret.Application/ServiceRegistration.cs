@@ -1,6 +1,7 @@
 ﻿using ETicaret.Application.Behaviors;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace ETicaret.Application
 {
@@ -8,7 +9,12 @@ namespace ETicaret.Application
     {
         public static void AddApplicationServices(this IServiceCollection services)
         {
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RedisCacheBeavior<,>));
+            var assembly = Assembly.GetExecutingAssembly();
+
+            services.AddMediatR(cfg=> cfg.RegisterServicesFromAssembly(assembly));
+
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheBehaviour<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheInvalidationBehaviour<,>));
         }
     }
 }

@@ -5,13 +5,15 @@ using ETicaret.Application.Repositories;
 using ETicaret.Domain.Entities.Common;
 using ETicaret.Persistence.Context;
 using ETicaret.Persistence.Repositories;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace ETicaret.Persistence.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly DataContext _context;
-        public UnitOfWork(DataContext context)
+        private readonly ETicaretContext _context;
+        private IDbContextTransaction? _transaction;
+        public UnitOfWork(ETicaretContext context)
         {
             _context = context;
         }
@@ -24,5 +26,30 @@ namespace ETicaret.Persistence.UnitOfWork
 
         public async Task<int> SaveAsync() => await _context.SaveChangesAsync();
         public async ValueTask DisposeAsync() => await _context.DisposeAsync();
+
+        public async Task BeginTransactionAsync()
+        {
+            _transaction = await _context.Database.BeginTransactionAsync();
+        }
+
+        public async Task CommitTransactionAsync()
+        {
+            if (_transaction != null)
+            {
+                await _transaction.CommitAsync();
+                await _transaction.DisposeAsync();
+                _transaction = null;
+            }
+        }
+
+        public async Task RollbackTransactionAsync()
+        {
+            if (_transaction != null)
+            {
+                await _transaction.RollbackAsync();
+                await _transaction.DisposeAsync();
+                _transaction = null;
+            }
+        }
     }
 }
