@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ETicaret.Application.Behaviors
 {
-    public class RedisCacheBeavior<TRequest,TResponse> : IPipelineBehavior<TRequest,TResponse>
+    public class RedisCacheBeavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
     {
         private readonly IRedisCacheService _redisCacheService;
         private readonly ILogger<RedisCacheBeavior<TRequest, TResponse>> _logger;
@@ -19,7 +19,7 @@ namespace ETicaret.Application.Behaviors
         {
             try
             {
-                if(request is ICacheableQuery query)
+                if (request is ICacheableQuery query)
                 {
                     var cacheKey = query.CacheKey;
                     var cacheTime = query.CacheTime;

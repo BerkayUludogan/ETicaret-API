@@ -22,8 +22,10 @@ namespace ETicaret.Infrastructure.RedisCache
         public async Task<T?> GetAsync<T>(string key)
         {
             var value = await _database.StringGetAsync(key);
-            if (value.HasValue) return JsonConvert.DeserializeObject<T>(value);
-            return default;
+            if (!value.HasValue) 
+             return default;
+            return JsonConvert.DeserializeObject<T>(value.ToString());
+
         }
 
         public async Task SetAsync<T>(string key, T value, DateTime? expirationTime = null)

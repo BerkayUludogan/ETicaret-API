@@ -48,9 +48,13 @@ namespace ETicaret.API
                         [new OpenApiSecuritySchemeReference("Bearer", doc)] = new List<string>()
                     });
             });
+            var key = configuration["JWT:SecurityKey"]
+                               ?? throw new InvalidOperationException("JWT:SecurityKey missing");
+            // TODO: Exceptionu düzelt.
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(opt =>
                 {
+                   
                     opt.TokenValidationParameters = new()
                     {
                         ValidateAudience = true, // Oluşturulacak token değerinin kimlerin/hangi originlerin/sitelerin kullanıcı belirlediğimiz değerdir.
@@ -60,7 +64,7 @@ namespace ETicaret.API
 
                         ValidAudience = configuration["JWT:Audience"],
                         ValidIssuer = configuration["JWT:Issuer"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:SecurityKey"])),
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
                         LifetimeValidator = (notBefore, expires, securityToken, validationParameters) =>
                         expires != null ? expires > DateTime.UtcNow : false,
                         RoleClaimType = ClaimTypes.Role,
