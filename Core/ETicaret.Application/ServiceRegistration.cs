@@ -1,4 +1,5 @@
 ﻿using ETicaret.Application.Common.Behaviors;
+using ETicaret.Application.Features.Auth.Rules;
 using ETicaret.Application.Features.Users.Rules;
 using FluentValidation;
 using MediatR;
@@ -21,7 +22,10 @@ namespace ETicaret.Application
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheInvalidationBehaviour<,>));
             
+
             services.AddScoped<IUserBusinessRules,UserBusinessRules>();
+            services.AddScoped<IAuthBusinessRules,AuthBusinessRules>();
+
         }
     }
 }

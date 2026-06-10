@@ -1,4 +1,3 @@
-﻿using ETicaret.Application.Common.Enums;
 using ETicaret.Domain.Entities.Identity;
 using ETicaret.Persistence.Seed.Abstract;
 using Microsoft.AspNetCore.Identity;
@@ -18,14 +17,16 @@ namespace ETicaret.Persistence.Seed.Concrete
                 {
                     Id = Guid.NewGuid(),
                     UserName = "admin",
-                    NormalizedUserName = RoleNames.Admin.ToString(),
-                    Email= "admin@gmail.com",
+                    NormalizedUserName = "ADMIN",
+                    Email = "admin@gmail.com",
                     NormalizedEmail = "ADMIN@GMAIL.COM",
                     EmailConfirmed = true,
                     PhoneNumberConfirmed = false,
                     SecurityStamp = Guid.NewGuid().ToString("D"),
                     CreatedDate = DateTime.UtcNow,
-                }; 
+                    IsActive = true,
+                };
+
                 user.PasswordHash = hasher.HashPassword(user, "123456");
                 context.Set<AppUserEntity>().Add(user);
                 context.SaveChanges();
