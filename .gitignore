@@ -361,3 +361,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Environment specific settings
+Presentation/ETicaret.API/appsettings.Development.json
+Presentation/ETicaret.API/appsettings.Production.json
+Presentation/ETicaret.API/appsettings.Local.json

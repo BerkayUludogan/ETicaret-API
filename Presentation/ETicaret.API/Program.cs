@@ -1,6 +1,8 @@
 using ETicaret.API;
 using ETicaret.Application;
+using ETicaret.Infrastructure;
 using ETicaret.Mapper;
+using ETicaret.Persistence;
 
 
 
@@ -10,8 +12,9 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.AppApi(builder.Configuration);
 builder.Services.AddApplicationServices();
+builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddCustomMapper();
-
+builder.Services.AddPersistanceServices(builder.Configuration);
 builder.Services.AddControllers();
 
 #region Project Environments
@@ -38,6 +41,8 @@ else
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
+/// Seed data registration
+app.SeedDataServices();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

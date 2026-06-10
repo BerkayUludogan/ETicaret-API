@@ -1,41 +1,35 @@
 ﻿using AutoMapper;
+using AutoMapperIMapper = AutoMapper.IMapper; 
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace ETicaret.Mapper.AutoMapper
 {
-    public class Mapper : Application.Abstractions.AutoMapper.IMapper
+    public class Mapper : ETicaret.Application.Shared.Abstractions.AutoMapper.IMapper
     {
-        private readonly IMapper _mapper;
+        private readonly AutoMapperIMapper _mapper;
 
         public Mapper()
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.AddMaps(typeof(Mapper).Assembly); // Profil'leri otomatik yükler
-
+                cfg.AddMaps(typeof(Mapper).Assembly);
             }, NullLoggerFactory.Instance);
 
-            try
-            {
-                config.AssertConfigurationIsValid();// Validasyon yapılıyor mappingler doğru mu
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message.ToString());
-            }
+            config.AssertConfigurationIsValid();
+
             _mapper = config.CreateMapper();
         }
 
         public TDestination Map<TDestination, TSource>(TSource source)
-            => _mapper.Map<TSource, TDestination>(source);
+            => _mapper.Map<TDestination>(source);
 
         public IList<TDestination> Map<TDestination, TSource>(IList<TSource> sources)
-            => _mapper.Map<IList<TSource>, IList<TDestination>>(sources);
+            => _mapper.Map<IList<TDestination>>(sources);
 
         public TDestination Map<TDestination>(object source)
             => _mapper.Map<TDestination>(source);
 
         public TDestination Map<TSource, TDestination>(TSource source, TDestination destination)
-           => _mapper.Map(source, destination);
+            => _mapper.Map(source, destination);
     }
 }

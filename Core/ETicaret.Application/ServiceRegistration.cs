@@ -1,4 +1,4 @@
-﻿using ETicaret.Application.Behaviors;
+﻿using ETicaret.Application.Shared.Behaviors;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;

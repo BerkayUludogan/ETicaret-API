@@ -1,4 +1,4 @@
-﻿using ETicaret.Application.Consts;
+﻿using ETicaret.Application.Shared.Consts;
 
 namespace ETicaret.Application.Helper
 {
