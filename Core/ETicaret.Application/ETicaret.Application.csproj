@@ -24,9 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Abstractions\Interfaces\" />
-    <Folder Include="Consts\FieldLengths\" />
-    <Folder Include="Features\Quaries\" />
+    <Folder Include="Common\Abstractions\Interfaces\" />
+    <Folder Include="Features\Users\Queries\" />
+    <Folder Include="Common\Constants\ErrorMessages\" />
   </ItemGroup>
 
 </Project>

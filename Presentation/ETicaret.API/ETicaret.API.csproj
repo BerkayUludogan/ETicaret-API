@@ -20,8 +20,11 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Core\ETicaret.Application\ETicaret.Application.csproj" />
 	  <ProjectReference Include="..\..\Core\ETicaret.Mapper\ETicaret.Mapper.csproj" />
-	  <ProjectReference Include="..\..\Infrastructor\ETicaret.Infrastructor\ETicaret.Infrastructure.csproj" />
-	  <ProjectReference Include="..\..\Infrastructor\ETicaret.Persistence\ETicaret.Persistence.csproj" />
+	  <ProjectReference Include="..\..\Infrastructure\ETicaret.Infrastructure\ETicaret.Infrastructure.csproj" />
+	  <ProjectReference Include="..\..\Infrastructure\ETicaret.Persistence\ETicaret.Persistence.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Middleware\" />
 	</ItemGroup>
 
 </Project>

@@ -6,8 +6,8 @@
     <Project Path="Core/ETicaret.Models/ETicaret.Models.csproj" Id="9ad6ad6c-2800-4c55-8cd4-7e65ea833bfa" />
   </Folder>
   <Folder Name="/Infrastructure/">
-    <Project Path="Infrastructor/ETicaret.Infrastructor/ETicaret.Infrastructure.csproj" />
-    <Project Path="Infrastructor/ETicaret.Persistence/ETicaret.Persistence.csproj" />
+    <Project Path="Infrastructure/ETicaret.Infrastructure/ETicaret.Infrastructure.csproj" />
+    <Project Path="Infrastructure/ETicaret.Persistence/ETicaret.Persistence.csproj" />
     <Project Path="Infrastructure/ETicaret.Redis/ETicaret.Redis.csproj" Id="4ae6b6d5-0779-4c8a-a410-713646d8e14c" />
   </Folder>
   <Folder Name="/Presentation/">
