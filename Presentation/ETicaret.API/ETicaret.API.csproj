@@ -24,8 +24,5 @@
 	  <ProjectReference Include="..\..\Infrastructure\ETicaret.Persistence\ETicaret.Persistence.csproj" />
 	  <ProjectReference Include="..\..\Infrastructure\ETicaret.Redis\ETicaret.Redis.csproj" />
 	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Middleware\" />
-	</ItemGroup>
 
 </Project>

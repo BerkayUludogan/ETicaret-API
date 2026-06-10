@@ -1,4 +1,5 @@
 using ETicaret.API;
+using ETicaret.API.Middleware;
 using ETicaret.Application;
 using ETicaret.Infrastructure;
 using ETicaret.Mapper;
@@ -33,18 +34,17 @@ builder.Configuration
 
 var app = builder.Build();
 
+#region Middlewares
+app.UseMiddleware<ExceptionHandlingMiddleware>();
+#endregion
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-}
-else
-{
-    app.UseExceptionHandler("/Home/Error");
-    app.UseHsts();
-}
 /// Seed data registration
 app.SeedDataServices();
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHsts();
+}
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
