@@ -1,4 +1,4 @@
-﻿namespace ETicaret.Infrastructor.Services.Token
+﻿namespace ETicaret.Infrastructure.Services.Token
 {
     public class TokenSettings
     {

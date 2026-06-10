@@ -21,12 +21,12 @@ namespace ETicaret.Persistence.Seed.Concrete
                     NormalizedUserName = RoleNames.Admin.ToString(),
                     Email= "admin@gmail.com",
                     NormalizedEmail = "ADMIN@GMAIL.COM",
-                    PasswordHash = hasher.HashPassword(null,"123456"),
                     EmailConfirmed = true,
                     PhoneNumberConfirmed = false,
                     SecurityStamp = Guid.NewGuid().ToString("D"),
                     CreatedDate = DateTime.UtcNow,
-                };
+                }; 
+                user.PasswordHash = hasher.HashPassword(user, "123456");
                 context.Set<AppUserEntity>().Add(user);
                 context.SaveChanges();
             }

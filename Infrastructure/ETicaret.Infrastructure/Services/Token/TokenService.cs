@@ -1,4 +1,5 @@
-﻿using ETicaret.Application.Common.Abstractions.Token;
+﻿using ETicaret.Application.Common.Abstractions.Token; 
+using ETicaret.Application.Common.Exceptions.Errors;
 using ETicaret.Application.Features.Auth.DTOs;
 using ETicaret.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
@@ -9,7 +10,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace ETicaret.Infrastructor.Services.Token
+namespace ETicaret.Infrastructure.Services.Token
 {
     public class TokenService : ITokenService
     {
@@ -34,7 +35,8 @@ namespace ETicaret.Infrastructor.Services.Token
             token.Expiration = DateTime.UtcNow.AddMinutes(_tokenSettings.TokenExpirationInMinutes);
             token.RefreshTokenExpiration = DateTime.UtcNow.AddDays
                 (_tokenSettings.RefreshTokenExpirationInDays);
-
+            if (string.IsNullOrWhiteSpace(user.Email))
+                throw new ETicaret.Application.Common.Exceptions.ValidationException(CommonErrors.UserEmailNotFound);
             var claims = new List<Claim>()
             {
                 new(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),

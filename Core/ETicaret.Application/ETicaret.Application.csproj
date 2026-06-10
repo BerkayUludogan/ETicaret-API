@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Common\Abstractions\Services\" />
     <Folder Include="Features\Auth\Commands\" />
     <Folder Include="Features\Users\Queries\" />
     <Folder Include="Common\Constants\ErrorMessages\" />

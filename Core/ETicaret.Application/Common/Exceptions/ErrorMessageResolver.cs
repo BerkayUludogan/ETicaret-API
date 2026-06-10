@@ -15,11 +15,12 @@ namespace ETicaret.Application.Common.Exceptions
                 [AuthErrors.InvalidCredentials] = "Email veya şifre hatalı",
                 [AuthErrors.Unauthorized] = "Yetkisiz işlem",
 
-                [CommonErrors.ValidationError] = "Doğrulama hatası oluştu"
+                [CommonErrors.ValidationError] = "Doğrulama hatası oluştu",
+                [CommonErrors.UserEmailNotFound] = "Kullanıcı email bilgisi bulunamadı."
             };
         public static string Get(string key)
             => Messages.TryGetValue(key, out var value)
-                ? value 
+                ? value
                 : key;
     }
 }
