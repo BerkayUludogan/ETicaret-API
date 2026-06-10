@@ -1,4 +1,4 @@
-﻿using ETicaret.Application.Shared.CustomAttributes;
+﻿using ETicaret.Application.Common.CustomAttributes;
 using ETicaret.Persistence.Context;
 using ETicaret.Persistence.Seed.Abstract;
 using Microsoft.AspNetCore.Builder;

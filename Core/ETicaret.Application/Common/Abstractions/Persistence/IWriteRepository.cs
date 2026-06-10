@@ -1,6 +1,6 @@
 ﻿using ETicaret.Domain.Entities.Common;
 
-namespace ETicaret.Application.Shared.Abstractions.Persistence
+namespace ETicaret.Application.Common.Abstractions.Persistence
 {
     public interface IWriteRepository<T> : IRepository<T> where T : BaseEntity, IEntityBase, new()
     {

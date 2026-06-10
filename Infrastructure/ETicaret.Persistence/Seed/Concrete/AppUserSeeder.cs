@@ -1,4 +1,4 @@
-﻿using ETicaret.Application.Shared.Enums;
+﻿using ETicaret.Application.Common.Enums;
 using ETicaret.Domain.Entities.Identity;
 using ETicaret.Persistence.Seed.Abstract;
 using Microsoft.AspNetCore.Identity;

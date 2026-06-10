@@ -1,4 +1,4 @@
-﻿using ETicaret.Application.Shared.Consts.FieldLengths;
+﻿using ETicaret.Application.Common.Constants.FieldLengths;
 using FluentValidation;
 
 namespace ETicaret.Application.Features.Users.Commands.CreateUser
@@ -36,10 +36,10 @@ namespace ETicaret.Application.Features.Users.Commands.CreateUser
                 .Length(AppUserFieldLengths.PasswordMin, AppUserFieldLengths.Password)
                     .WithMessage($"Şifre en az {AppUserFieldLengths.PasswordMin} ve en fazla {AppUserFieldLengths.Password} karakter olmalıdır.")
                 .Must(p => !p.Contains(" ")).WithMessage("Şifre boşluk içeremez.")
-                .Matches(@"[a-z]").WithMessage("En az bir küçük harf içermelidir.")
-                .Matches(@"[A-Z]").WithMessage("En az bir büyük harf içermelidir.")
+              //  .Matches(@"[a-z]").WithMessage("En az bir küçük harf içermelidir.")
+               // .Matches(@"[A-Z]").WithMessage("En az bir büyük harf içermelidir.")
                 .Matches(@"\d").WithMessage("En az bir rakam içermelidir.")
-                .Matches(@"[\W_]").WithMessage("En az bir özel karakter içermelidir.")
+               // .Matches(@"[\W_]").WithMessage("En az bir özel karakter içermelidir.")
                 .Matches(@"^\S+$").WithMessage("Şifre boşluk karakteri içeremez.");
         }
     }

@@ -1,4 +1,5 @@
-﻿using ETicaret.Application.Shared.Abstractions.Token;
+﻿using ETicaret.Application.Common.Abstractions.Token;
+using ETicaret.Application.Features.Auth.DTOs;
 using ETicaret.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
@@ -21,9 +22,9 @@ namespace ETicaret.Infrastructor.Services.Token
             _tokenSettings = tokenSettings.Value;
         }
 
-        public async Task<Application.DTOs.Token> CreateAccessToken(AppUserEntity user, IList<string> roles)
+        public async Task<TokenDto> CreateAccessToken(AppUserEntity user, IList<string> roles)
         {
-            Application.DTOs.Token token = new();
+            TokenDto token = new();
 
             //Security key'in simetriği alınıyor.
             SymmetricSecurityKey securityKey = new(Encoding.UTF8.GetBytes(_tokenSettings.SecurityKey));

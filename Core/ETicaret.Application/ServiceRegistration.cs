@@ -1,4 +1,6 @@
-﻿using ETicaret.Application.Shared.Behaviors;
+﻿using ETicaret.Application.Common.Behaviors;
+using ETicaret.Application.Features.Users.Rules;
+using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -12,9 +14,14 @@ namespace ETicaret.Application
             var assembly = Assembly.GetExecutingAssembly();
 
             services.AddMediatR(cfg=> cfg.RegisterServicesFromAssembly(assembly));
+            
+            services.AddValidatorsFromAssembly(assembly);
 
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheInvalidationBehaviour<,>));
+            
+            services.AddScoped<IUserBusinessRules,UserBusinessRules>();
         }
     }
 }

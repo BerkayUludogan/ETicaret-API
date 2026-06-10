@@ -1,7 +1,7 @@
 ﻿using ETicaret.Application.Common.Abstractions.Caching;
 using MediatR;
 
-namespace ETicaret.Application.Shared.Behaviors
+namespace ETicaret.Application.Common.Behaviors
 {
     public sealed class CacheInvalidationBehaviour<TReq, TRes>(
         ICacheService cacheService)

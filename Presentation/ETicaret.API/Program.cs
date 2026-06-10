@@ -3,6 +3,7 @@ using ETicaret.Application;
 using ETicaret.Infrastructure;
 using ETicaret.Mapper;
 using ETicaret.Persistence;
+using ETicaret.Redis;
 
 
 
@@ -16,6 +17,7 @@ builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddCustomMapper();
 builder.Services.AddPersistanceServices(builder.Configuration);
 builder.Services.AddControllers();
+builder.Services.AddRedisServices(builder.Configuration);
 
 #region Project Environments
 var env = builder.Environment;

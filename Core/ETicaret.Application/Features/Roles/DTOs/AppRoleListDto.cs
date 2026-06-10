@@ -1,4 +1,4 @@
-﻿namespace ETicaret.Application.DTOs.Role
+﻿namespace ETicaret.Application.Features.Roles.DTOs
 {
     public class AppRoleListDto
     {

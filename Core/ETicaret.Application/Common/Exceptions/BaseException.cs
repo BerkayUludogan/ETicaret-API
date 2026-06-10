@@ -1,6 +1,8 @@
 ﻿
 
-namespace ETicaret.Application.Shared.Exceptions
+using ETicaret.Application.Common.Exceptions;
+
+namespace ETicaret.Application.Common.Exceptions
 {
     public abstract class BaseException : Exception
     {

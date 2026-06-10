@@ -1,4 +1,4 @@
-﻿namespace ETicaret.Application.Shared.Abstractions.AutoMapper
+﻿namespace ETicaret.Application.Common.Abstractions.AutoMapper
 {
     public interface IMapper
     {

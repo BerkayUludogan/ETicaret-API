@@ -1,4 +1,4 @@
-﻿namespace ETicaret.Application.Shared.Consts.FieldLengths
+﻿namespace ETicaret.Application.Common.Constants.FieldLengths
 {
     public class AppUserFieldLengths
     {

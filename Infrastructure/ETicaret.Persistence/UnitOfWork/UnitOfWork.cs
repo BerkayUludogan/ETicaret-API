@@ -1,5 +1,5 @@
-﻿using ETicaret.Application.Shared.Abstractions.Persistence;
-using ETicaret.Application.Shared.Abstractions.UnitOfWorks;
+﻿using ETicaret.Application.Common.Abstractions.Persistence;
+using ETicaret.Application.Common.Abstractions.UnitOfWorks;
 using ETicaret.Domain.Entities.Common;
 using ETicaret.Persistence.Context;
 using ETicaret.Persistence.Repositories;

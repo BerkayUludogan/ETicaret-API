@@ -1,6 +1,6 @@
-﻿namespace ETicaret.Application.DTOs
+﻿namespace ETicaret.Application.Features.Auth.DTOs
 {
-    public class Token
+    public class TokenDto
     {
         public string AccessToken { get; set; } = string.Empty;
         public DateTime Expiration{ get; set; }

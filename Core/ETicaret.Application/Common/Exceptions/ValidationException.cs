@@ -1,4 +1,4 @@
-﻿namespace ETicaret.Application.Shared.Exceptions
+﻿namespace ETicaret.Application.Common.Exceptions
 {
     public class ValidationException : BaseException
     {

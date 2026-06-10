@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 
 
-namespace ETicaret.Application.Shared.Abstractions.Persistence
+namespace ETicaret.Application.Common.Abstractions.Persistence
 {
     public interface IRepository<T> where T : BaseEntity, IEntityBase, new()
     {

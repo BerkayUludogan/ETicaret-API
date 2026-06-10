@@ -1,4 +1,4 @@
-﻿namespace ETicaret.Application.Shared.Base
+﻿namespace ETicaret.Application.Common.Base
 {
     public abstract class BaseRules
     {

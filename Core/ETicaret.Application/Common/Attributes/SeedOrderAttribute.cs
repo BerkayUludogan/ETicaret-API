@@ -1,4 +1,4 @@
-﻿namespace ETicaret.Application.Shared.CustomAttributes
+﻿namespace ETicaret.Application.Common.CustomAttributes
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class SeedOrderAttribute : Attribute

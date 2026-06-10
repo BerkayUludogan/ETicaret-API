@@ -1,7 +1,8 @@
-﻿using ETicaret.Application.Shared.Abstractions.Persistence;
+﻿
+using ETicaret.Application.Common.Abstractions.Persistence;
 using ETicaret.Domain.Entities.Common;
 
-namespace ETicaret.Application.Shared.Abstractions.UnitOfWorks
+namespace ETicaret.Application.Common.Abstractions.UnitOfWorks
 {
     public interface IUnitOfWork : IAsyncDisposable
     { 

@@ -1,4 +1,4 @@
-﻿namespace ETicaret.Application.Shared.Consts
+﻿namespace ETicaret.Application.Common.Constants
 {
     internal sealed class CacheKeySettings
     {

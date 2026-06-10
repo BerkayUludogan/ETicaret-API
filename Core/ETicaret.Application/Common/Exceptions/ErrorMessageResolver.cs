@@ -1,6 +1,6 @@
-﻿using ETicaret.Application.Shared.Exceptions.Errors;
+﻿using ETicaret.Application.Common.Exceptions.Errors;
 
-namespace ETicaret.Application.Shared.Exceptions
+namespace ETicaret.Application.Common.Exceptions
 {
     public static class ErrorMessageResolver
     {
@@ -9,6 +9,7 @@ namespace ETicaret.Application.Shared.Exceptions
             {
                 [UserErrors.NotFound] = "Kullanıcı bulunamadı",
                 [UserErrors.EmailAlreadyExists] = "Bu email zaten kayıtlı",
+                [UserErrors.UserNameAlreadyExists] = "Bu kullanıcı adı zaten kayıtlı",
                 [UserErrors.PasswordTooShort] = "Şifre çok kısa",
 
                 [AuthErrors.InvalidCredentials] = "Email veya şifre hatalı",

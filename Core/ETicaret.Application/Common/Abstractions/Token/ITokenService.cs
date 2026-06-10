@@ -1,10 +1,11 @@
-﻿using ETicaret.Domain.Entities.Identity;
+﻿using ETicaret.Application.Features.Auth.DTOs;
+using ETicaret.Domain.Entities.Identity;
 
-namespace ETicaret.Application.Shared.Abstractions.Token
+namespace ETicaret.Application.Common.Abstractions.Token
 {
     public interface ITokenService
     {
-        Task<DTOs.Token> CreateAccessToken(AppUserEntity user, IList<string> roles);
+        Task<TokenDto> CreateAccessToken(AppUserEntity user, IList<string> roles);
         string CreateRefreshToken();
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace ETicaret.Application.Shared.Enums
+﻿namespace ETicaret.Application.Common.Enums
 {
     public static class RoleNames
     {

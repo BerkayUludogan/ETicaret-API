@@ -1,4 +1,5 @@
-﻿using ETicaret.Application.Shared.Abstractions.AutoMapper;
+﻿
+using ETicaret.Application.Common.Abstractions.AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ETicaret.Mapper

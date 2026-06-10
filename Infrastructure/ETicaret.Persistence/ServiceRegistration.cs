@@ -5,8 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ETicaret.Persistence.UnitOfWorks; 
-using ETicaret.Application.Shared.Abstractions.UnitOfWorks;
-using ETicaret.Application.Shared.Consts.FieldLengths;
+using ETicaret.Application.Common.Abstractions.UnitOfWorks;
+using ETicaret.Application.Common.Constants.FieldLengths;
 namespace ETicaret.Persistence
 {
     public static class ServiceRegistration

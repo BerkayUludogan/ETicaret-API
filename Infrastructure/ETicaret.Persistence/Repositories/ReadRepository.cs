@@ -2,7 +2,7 @@
 using ETicaret.Persistence.Context;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using ETicaret.Application.Shared.Abstractions.Persistence;
+using ETicaret.Application.Common.Abstractions.Persistence;
 
 namespace ETicaret.Persistence.Repositories
 {

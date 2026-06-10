@@ -1,4 +1,4 @@
-﻿using ETicaret.Application.Shared.Abstractions.Persistence;
+﻿using ETicaret.Application.Common.Abstractions.Persistence;
 using ETicaret.Domain.Entities.Common;
 using ETicaret.Persistence.Context;
 using Microsoft.EntityFrameworkCore;

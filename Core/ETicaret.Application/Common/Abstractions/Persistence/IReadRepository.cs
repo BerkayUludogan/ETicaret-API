@@ -1,7 +1,7 @@
 ﻿using ETicaret.Domain.Entities.Common;
 using System.Linq.Expressions;
 
-namespace ETicaret.Application.Shared.Abstractions.Persistence
+namespace ETicaret.Application.Common.Abstractions.Persistence
 {
     public interface IReadRepository<T> : IRepository<T> where T : BaseEntity, IEntityBase, new()
     {

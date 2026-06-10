@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace ETicaret.Mapper.AutoMapper
 {
-    public class Mapper : ETicaret.Application.Shared.Abstractions.AutoMapper.IMapper
+    public class Mapper : ETicaret.Application.Common.Abstractions.AutoMapper.IMapper
     {
         private readonly AutoMapperIMapper _mapper;
 

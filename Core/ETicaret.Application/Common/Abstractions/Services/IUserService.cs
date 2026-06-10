@@ -1,6 +1,6 @@
 ﻿using ETicaret.Application.Features.Users.DTOs;
 
-namespace ETicaret.Application.Shared.Abstractions.Services
+namespace ETicaret.Application.Common.Abstractions.Services
 {
     public interface IUserService
     {

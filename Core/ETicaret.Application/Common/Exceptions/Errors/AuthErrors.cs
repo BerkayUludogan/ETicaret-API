@@ -1,4 +1,4 @@
-﻿namespace ETicaret.Application.Shared.Exceptions.Errors
+﻿namespace ETicaret.Application.Common.Exceptions.Errors
 {
     public class AuthErrors
     {
