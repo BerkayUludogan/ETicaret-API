@@ -1,9 +1,11 @@
 ﻿
 using ETicaret.Application.Common.Abstractions.AutoMapper;
+using ETicaret.Application.Common.Enums;
 using ETicaret.Application.Features.Users.Rules;
 using ETicaret.Domain.Entities.Identity;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using ETicaret.Application.Common.Exceptions;
 
 namespace ETicaret.Application.Features.Users.Commands.CreateUser
 {
@@ -38,11 +40,22 @@ namespace ETicaret.Application.Features.Users.Commands.CreateUser
                     .Select(x => x.Description)
                     .ToList();
 
-                throw new ETicaret.Application.Common.Exceptions.ValidationException(errors);
+                throw new ValidationException(errors);
+            }
+            var roleResult = await _userManager.AddToRoleAsync(user, RoleNames.Customer);
+
+            if (!roleResult.Succeeded)
+            {
+                await _userManager.DeleteAsync(user);
+                var errors = roleResult.Errors
+                      .Select(x => x.Description)
+                      .ToList();
+                throw new ValidationException(errors);
             }
             return new CreateUserCommandResponse
             {
                 Id = user.Id
+
             };
         }
     }
