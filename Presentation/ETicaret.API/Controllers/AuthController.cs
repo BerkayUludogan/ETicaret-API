@@ -32,7 +32,7 @@ namespace ETicaret.API.Controllers
         }
         [Authorize]
         [HttpPost("logout")]
-        public async Task<IActionResult> Logout(LogoutCommandRequest logoutCommandRequest)
+        public async Task<IActionResult> Logout()
         {
 
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
