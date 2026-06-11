@@ -1,4 +1,3 @@
-﻿using ETicaret.Application.Common.Validation;
 using FluentValidation;
 
 namespace ETicaret.Application.Features.Auth.Commands.Logout
@@ -7,7 +6,9 @@ namespace ETicaret.Application.Features.Auth.Commands.Logout
     {
         public LogoutCommandValidator()
         {
-            RuleFor(x => x.RefreshToken).ValidRefreshToken();
+            RuleFor(x => x.UserId)
+                .NotEmpty()
+                .WithMessage("Id boş olamaz.");
         }
     }
 }
