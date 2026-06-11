@@ -7,6 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using ETicaret.Persistence.UnitOfWorks; 
 using ETicaret.Application.Common.Abstractions.UnitOfWorks;
 using ETicaret.Application.Common.Constants.FieldLengths;
+using ETicaret.Application.Common.Abstractions.Services;
+using ETicaret.Application.Features.Auth.DTOs;
+using ETicaret.Persistence.Services;
 namespace ETicaret.Persistence
 {
     public static class ServiceRegistration
@@ -30,6 +33,7 @@ namespace ETicaret.Persistence
          //   services.AddScoped<IUserService, UserService>(); 
 
             services.AddScoped<IUnitOfWork,UnitOfWork>();
+            services.AddScoped<IAuthAuditService, UserLoginAuditService>();
         }
     }
 }

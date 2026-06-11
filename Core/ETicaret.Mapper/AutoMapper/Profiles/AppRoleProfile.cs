@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
-using ETicaret.Application.Features.Users.Commands.CreateUser;
-using ETicaret.Application.Features.Users.DTOs;
+using ETicaret.Application.Features.Users.Commands.CreateUser;  
 using ETicaret.Domain.Entities.Identity;
 
 namespace ETicaret.Mapper.AutoMapper.Profiles

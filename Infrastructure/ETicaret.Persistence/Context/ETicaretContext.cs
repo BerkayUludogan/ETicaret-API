@@ -1,4 +1,5 @@
-﻿using ETicaret.Domain.Entities.Common;
+﻿using ETicaret.Domain.Entities.Auth;
+using ETicaret.Domain.Entities.Common;
 using ETicaret.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,10 @@ namespace ETicaret.Persistence.Context
         public ETicaretContext() { }
 
         public ETicaretContext(DbContextOptions<ETicaretContext> options) : base(options) { }
+
+        public DbSet<UserLoginAuditEntity> UserLoginAudits { get; set; }
+
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

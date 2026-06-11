@@ -1,5 +1,5 @@
 using ETicaret.Application.Common.Abstractions.Token;
-using ETicaret.Infrastructor.Services.Token;
+using ETicaret.Infrastructure.Services.Token;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
