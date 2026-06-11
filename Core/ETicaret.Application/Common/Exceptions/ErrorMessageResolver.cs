@@ -14,6 +14,12 @@ namespace ETicaret.Application.Common.Exceptions
 
                 [AuthErrors.InvalidCredentials] = "Email veya şifre hatalı",
                 [AuthErrors.Unauthorized] = "Yetkisiz işlem",
+                [AuthErrors.UserNotActive] = "Kullanıcı hesabı aktif değil",
+                [AuthErrors.EmailNotConfirmed] = "E-posta adresi doğrulanmamış",
+                [AuthErrors.RefreshTokenNotSaved] = "Refresh token kaydedilemedi",
+                [AuthErrors.InvalidRefreshToken] = "Refresh token geçersiz",
+                [AuthErrors.ExpiredRefreshToken] = "Refresh token süresi dolmuş",
+                [AuthErrors.UserLockedOut] = "Çok fazla hatalı giriş denemesi yapıldı. Lütfen daha sonra tekrar deneyin.",
 
                 [CommonErrors.ValidationError] = "Doğrulama hatası oluştu",
                 [CommonErrors.UserEmailNotFound] = "Kullanıcı email bilgisi bulunamadı."

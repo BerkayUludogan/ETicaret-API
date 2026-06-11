@@ -32,7 +32,17 @@ namespace ETicaret.Application.Features.Auth.Rules
         {
             var isValid = await _userManager.CheckPasswordAsync(user, password);
             if (!isValid)
+            {
+                await _userManager.AccessFailedAsync(user);
                 throw new UnauthorizedException(AuthErrors.InvalidCredentials);
+            }
+            await _userManager.ResetAccessFailedCountAsync(user);
+        }
+
+        public async Task UserMustNotBeLockedOut(AppUserEntity user)
+        {
+            if (await _userManager.IsLockedOutAsync(user))
+                throw new UnauthorizedException(AuthErrors.UserLockedOut);
         }
     }
 }

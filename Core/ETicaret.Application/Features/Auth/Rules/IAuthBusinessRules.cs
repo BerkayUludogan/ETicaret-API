@@ -7,5 +7,6 @@ namespace ETicaret.Application.Features.Auth.Rules
         Task<AppUserEntity> UserMustExistByEmail(string email);
         Task UserMustBeActive(AppUserEntity user);
         Task UserPasswordMustBeValid(AppUserEntity user,string password);
+        Task UserMustNotBeLockedOut(AppUserEntity user);
     }
 }
