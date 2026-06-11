@@ -1,27 +1,42 @@
-﻿using ETicaret.Domain.Entities.Identity;
-using ETicaret.Persistence.Seed.Abstract;
-using Microsoft.EntityFrameworkCore;
+﻿//using ETicaret.Application.Common.Enums;
+//using ETicaret.Domain.Entities.Identity;
+//using ETicaret.Persistence.Seed.Abstract;
+//using Microsoft.EntityFrameworkCore;
 
 //namespace ETicaret.Persistence.Seed.Concrete
 //{
-   
+
 //    public class AppRoleSeeder : ISeeder
 //    {
 //        public void Seed(DbContext context)
 //        {
-//            if (!context.Set<AppRoleEntity>().Any())
+//            if (!context.Set<AppRoleEntity>()
+//                 .Any(x => x.Name == RoleNames.Admin.ToString() && x.Name == RoleNames.Customer.ToString()))
 //            {
 //                AppRoleEntity adminRole = new()
 //                {
-//                    Id = Guid.Parse("407CC2FE-D098-41E6-8AE3-D36962F0B004"),
+//                    Id = Guid.NewGuid(),
 //                    Name = RoleNames.Admin.ToString(),
-//                    NormalizedName = RoleNames.Admin.ToString(),
+//                    NormalizedName = "ADMIN",
 //                    Description = "Yönetici rolü, tüm sistem yönetim yetkilerine sahip",
 //                    IsActive = true,
 //                    ConcurrencyStamp = Guid.NewGuid().ToString("D"),
 //                    CreatedDate = DateTime.Now,
 //                };
-//                context.Set<AppRoleEntity>().Add(adminRole);
+//                AppRoleEntity customerRole = new()
+//                {
+//                    Id = Guid.NewGuid(),
+//                    Name = RoleNames.Customer.ToString(),
+//                    NormalizedName = "CUSTOMER",
+//                    Description = "Müşteri",
+//                    IsActive = true,
+//                    ConcurrencyStamp = Guid.NewGuid().ToString("D"),
+//                    CreatedDate = DateTime.Now,
+//                };
+
+
+
+//                context.Set<AppRoleEntity>().AddRange( customerRole);
 //                context.SaveChanges();
 //            }
 //        }

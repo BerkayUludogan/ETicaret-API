@@ -26,11 +26,13 @@ namespace ETicaret.Persistence
                 opt.Password.RequireLowercase = false;
                 opt.Password.RequireUppercase = false;
                 opt.User.RequireUniqueEmail = true;
+
+                opt.Lockout.AllowedForNewUsers = true;
+                opt.Lockout.MaxFailedAccessAttempts = 5;
+                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+
+
             }).AddEntityFrameworkStores<ETicaretContext>().AddDefaultTokenProviders();
-
-
-
-         //   services.AddScoped<IUserService, UserService>(); 
 
             services.AddScoped<IUnitOfWork,UnitOfWork>();
             services.AddScoped<IAuthAuditService, UserLoginAuditService>();

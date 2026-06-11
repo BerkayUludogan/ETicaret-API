@@ -43,5 +43,13 @@ namespace ETicaret.Application.Common.Validation
                 .Must(value => !string.IsNullOrWhiteSpace(value) && !value.Contains(' '))
                 .WithMessage("Kullanıcı adı veya e-posta boşluk içeremez.");
         }
+        public static IRuleBuilderOptions<T, string> ValidRefreshToken<T>
+            (this IRuleBuilderInitial<T, string> ruleBuilder)
+        {
+            return ruleBuilder
+            .Cascade(CascadeMode.Stop)
+            .NotEmpty().WithMessage("Refresh token boş olamaz.")
+            .MaximumLength(500).WithMessage("Refresh token geçersiz.");
+        }
     }
 }

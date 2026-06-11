@@ -14,22 +14,22 @@ namespace ETicaret.Application.Features.Auth.Commands.LoginUser
     public class LoginUserCommandHandler : IRequestHandler<LoginUserCommandRequest, LoginUserCommandResponse>
     {
         private readonly IAuthBusinessRules _authBusinessRules;
-        private readonly UserManager<AppUserEntity> _userManager; 
+        private readonly UserManager<AppUserEntity> _userManager;
         private readonly ITokenService _tokenService;
-        private readonly IHttpContextAccessor _httpContextAccessor; 
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IAuthAuditService _authAuditService;
 
         public LoginUserCommandHandler(
             UserManager<AppUserEntity> userManager,
-            ITokenService tokenService, 
-            IAuthBusinessRules authBusinessRules, 
-            IHttpContextAccessor httpContextAccessor, 
+            ITokenService tokenService,
+            IAuthBusinessRules authBusinessRules,
+            IHttpContextAccessor httpContextAccessor,
             IAuthAuditService authAuditService)
         {
-            _userManager = userManager; 
+            _userManager = userManager;
             _tokenService = tokenService;
             _authBusinessRules = authBusinessRules;
-            _httpContextAccessor = httpContextAccessor; 
+            _httpContextAccessor = httpContextAccessor;
             _authAuditService = authAuditService;
         }
 
@@ -39,14 +39,28 @@ namespace ETicaret.Application.Features.Auth.Commands.LoginUser
 
             AppUserEntity? user = null;
 
+           
             try
             {
                 user = await _authBusinessRules.UserMustExistByEmail(request.Email);
-                await _authBusinessRules.UserMustBeActive(user);
-                await _authBusinessRules.UserPasswordMustBeValid(user, request.Password);
 
+                await _authBusinessRules.UserMustBeActive(user);
+                await _authBusinessRules.UserMustNotBeLockedOut(user);
+                await _authBusinessRules.UserPasswordMustBeValid(user, request.Password);
+             
                 var roles = await _userManager.GetRolesAsync(user);
                 var token = await _tokenService.CreateAccessToken(user, roles);
+
+                user.RefreshToken = token.RefreshToken;
+                user.RefreshTokenEndDate = token.RefreshTokenExpiration;
+                var updateResult = await _userManager.UpdateAsync(user);
+
+                if (!updateResult.Succeeded)
+                {
+                    var errors = updateResult.Errors
+                        .Select(x => x.Description).ToList();
+                    throw new Common.Exceptions.ValidationException(errors);
+                }
 
                 await _authAuditService.LogLoginAttemptAsync(new UserLoginAuditDto
                 {
@@ -67,6 +81,7 @@ namespace ETicaret.Application.Features.Auth.Commands.LoginUser
                         UserName = user.UserName!,
                         Email = user.Email!,
                         Roles = roles.ToList()
+
                     }
                 };
             }
@@ -77,13 +92,13 @@ namespace ETicaret.Application.Features.Auth.Commands.LoginUser
                     Email = request.Email,
                     IPAddress = ipAddress,
                     LoginTime = DateTime.UtcNow,
-                    Success = false, 
+                    Success = false,
                     UserId = user?.Id,
                     FailureReason = AuthErrors.InvalidCredentials
                 });
                 throw;
             }
-             
+
         }
     }
 }
