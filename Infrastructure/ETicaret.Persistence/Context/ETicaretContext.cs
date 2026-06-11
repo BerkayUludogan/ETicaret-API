@@ -1,4 +1,5 @@
 ﻿using ETicaret.Domain.Entities.Auth;
+using ETicaret.Domain.Entities.Catalog;
 using ETicaret.Domain.Entities.Common;
 using ETicaret.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -14,7 +15,8 @@ namespace ETicaret.Persistence.Context
         public ETicaretContext(DbContextOptions<ETicaretContext> options) : base(options) { }
 
         public DbSet<UserLoginAuditEntity> UserLoginAudits { get; set; }
-
+        public DbSet<ProductEntity> Products { get; set; }
+        public DbSet<CategoryEntity> Categories { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -33,7 +35,7 @@ namespace ETicaret.Persistence.Context
                 _ = data.State switch
                 {
                     EntityState.Added => data.Entity.CreatedDate = DateTime.UtcNow,
-                    EntityState.Modified => data.Entity.ModifiedDate= DateTime.UtcNow,
+                    EntityState.Modified => data.Entity.ModifiedDate = DateTime.UtcNow,
                     _ => DateTime.Now,
                 };
             }
