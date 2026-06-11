@@ -1,7 +1,10 @@
 ﻿using ETicaret.Application.Features.Auth.Commands.LoginUser;
+using ETicaret.Application.Features.Auth.Commands.Logout;
 using ETicaret.Application.Features.Auth.Commands.RefreshToken;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace ETicaret.API.Controllers
 {
@@ -26,6 +29,19 @@ namespace ETicaret.API.Controllers
         {
             RefreshTokenCommandResponse response = await _mediator.Send(refreshTokenCommandRequest);
             return Ok(response);
+        }
+        [Authorize]
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout(LogoutCommandRequest logoutCommandRequest)
+        {
+
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrWhiteSpace(userId))
+                return Unauthorized();
+
+            await _mediator.Send(new LogoutCommandRequest { UserId = Guid.Parse(userId) });
+            return NoContent();
         }
     }
 }

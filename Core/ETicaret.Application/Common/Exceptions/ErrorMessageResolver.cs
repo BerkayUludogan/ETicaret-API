@@ -20,6 +20,7 @@ namespace ETicaret.Application.Common.Exceptions
                 [AuthErrors.InvalidRefreshToken] = "Refresh token geçersiz",
                 [AuthErrors.ExpiredRefreshToken] = "Refresh token süresi dolmuş",
                 [AuthErrors.UserLockedOut] = "Çok fazla hatalı giriş denemesi yapıldı. Lütfen daha sonra tekrar deneyin.",
+                [AuthErrors.LogoutFailed] = "Çıkış işlemi tamamlanmadı.",
 
                 [CommonErrors.ValidationError] = "Doğrulama hatası oluştu",
                 [CommonErrors.UserEmailNotFound] = "Kullanıcı email bilgisi bulunamadı."

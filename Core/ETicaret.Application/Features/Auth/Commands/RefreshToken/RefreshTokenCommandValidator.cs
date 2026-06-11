@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using ETicaret.Application.Common.Validation;
+using FluentValidation;
 
 namespace ETicaret.Application.Features.Auth.Commands.RefreshToken
 {
@@ -6,10 +7,7 @@ namespace ETicaret.Application.Features.Auth.Commands.RefreshToken
     {
         public RefreshTokenCommandValidator()
         {
-            RuleFor(x => x.RefreshToken)
-             .Cascade(CascadeMode.Stop)
-             .NotEmpty().WithMessage("Refresh token boş olamaz.")
-             .MaximumLength(500).WithMessage("Refresh token geçersiz.");
+            RuleFor(x => x.RefreshToken).ValidRefreshToken();
         }
     }
 }

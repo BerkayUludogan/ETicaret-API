@@ -11,5 +11,6 @@
         public const string InvalidRefreshToken  = "Auth.InvalidRefreshToken";
         public const string ExpiredRefreshToken  = "Auth.ExpiredRefreshToken";
         public const string UserLockedOut        = "Auth.UserLockedOut";
+        public const string LogoutFailed         = "Auth.LogoutFailed";
     }
 }
