@@ -18,7 +18,7 @@ namespace ETicaret.Persistence.Services
             var entity = new UserLoginAuditEntity
             {
                 Id = Guid.NewGuid(),
-                UserNameOrEmail = auditDto.UserNameOrEmail,
+                UserNameOrEmail = auditDto.Email,
                 IPAddress = auditDto.IPAddress,
                 LoginTime = auditDto.LoginTime,
                 Success = auditDto.Success, 

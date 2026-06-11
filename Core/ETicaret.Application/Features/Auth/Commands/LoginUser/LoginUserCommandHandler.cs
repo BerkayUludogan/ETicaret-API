@@ -41,7 +41,7 @@ namespace ETicaret.Application.Features.Auth.Commands.LoginUser
 
             try
             {
-                user = await _authBusinessRules.UserMustExistByEmail(request.UsernameEmail);
+                user = await _authBusinessRules.UserMustExistByEmail(request.Email);
                 await _authBusinessRules.UserMustBeActive(user);
                 await _authBusinessRules.UserPasswordMustBeValid(user, request.Password);
 
@@ -51,7 +51,7 @@ namespace ETicaret.Application.Features.Auth.Commands.LoginUser
                 await _authAuditService.LogLoginAttemptAsync(new UserLoginAuditDto
                 {
 
-                    UserNameOrEmail = request.UsernameEmail,
+                    Email = request.Email,
                     IPAddress = ipAddress,
                     LoginTime = DateTime.UtcNow,
                     Success = true,
@@ -74,7 +74,7 @@ namespace ETicaret.Application.Features.Auth.Commands.LoginUser
             {
                 await _authAuditService.LogLoginAttemptAsync(new UserLoginAuditDto
                 {
-                    UserNameOrEmail = request.UsernameEmail,
+                    Email = request.Email,
                     IPAddress = ipAddress,
                     LoginTime = DateTime.UtcNow,
                     Success = false, 

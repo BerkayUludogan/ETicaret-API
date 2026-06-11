@@ -2,7 +2,7 @@
 {
     public class UserLoginAuditDto
     {
-        public required string UserNameOrEmail { get; set; }
+        public required string Email { get; set; }
         public required string IPAddress { get; set; }
         public DateTime LoginTime { get; set; }
         public bool Success { get; set; } 

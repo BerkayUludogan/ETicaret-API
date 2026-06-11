@@ -8,7 +8,7 @@ namespace ETicaret.Application.Features.Auth.Commands.LoginUser
     {
         public LoginUserCommandValidator()
         {
-            RuleFor(x => x.UsernameEmail).ValidEmail();
+            RuleFor(x => x.Email).ValidEmail();
             RuleFor(x => x.Password).ValidPassword(); 
         }
     }
