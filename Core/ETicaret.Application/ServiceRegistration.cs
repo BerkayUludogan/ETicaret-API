@@ -1,5 +1,6 @@
 ﻿using ETicaret.Application.Common.Behaviors;
 using ETicaret.Application.Features.Auth.Rules;
+using ETicaret.Application.Features.Categories.Rules;
 using ETicaret.Application.Features.Users.Rules;
 using FluentValidation;
 using MediatR;
@@ -25,6 +26,7 @@ namespace ETicaret.Application
 
             services.AddScoped<IUserBusinessRules,UserBusinessRules>();
             services.AddScoped<IAuthBusinessRules,AuthBusinessRules>();
+            services.AddScoped<ICategoryBusinessRules,CategoryBusinessRules>();
 
         }
     }
