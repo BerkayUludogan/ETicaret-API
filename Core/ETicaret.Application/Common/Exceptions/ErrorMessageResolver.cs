@@ -23,7 +23,13 @@ namespace ETicaret.Application.Common.Exceptions
                 [AuthErrors.LogoutFailed] = "Çıkış işlemi tamamlanmadı.",
 
                 [CommonErrors.ValidationError] = "Doğrulama hatası oluştu",
-                [CommonErrors.UserEmailNotFound] = "Kullanıcı email bilgisi bulunamadı."
+                [CommonErrors.UserEmailNotFound] = "Kullanıcı email bilgisi bulunamadı.",
+
+                [CategoryErrors.NameAlreadyExists] = "Bu kategori adı zaten kullanılıyor",
+                [CategoryErrors.SlugAlreadyExists] = "Bu kategori slug değeri zaten kullanılıyor",
+                [CategoryErrors.ParentCategoryNotFound] = "Üst kategori bulunamadı",
+
+
             };
         public static string Get(string key)
             => Messages.TryGetValue(key, out var value)
