@@ -22,6 +22,7 @@ namespace ETicaret.Application.Features.Categories.Rules
                 throw new BusinessRuleException(CategoryErrors.NameAlreadyExists);
         }
 
+
         public async Task CategorySlugMustBeUnique(string categorySlug)
         {
             var exists = await _unitofWork
@@ -30,7 +31,6 @@ namespace ETicaret.Application.Features.Categories.Rules
             if (exists is not null)
                 throw new BusinessRuleException(CategoryErrors.SlugAlreadyExists);
         }
-
         public async Task ParentCategoryMustExistIfProvided(Guid? parentCategoryId)
         {
             if (parentCategoryId is null)
@@ -42,5 +42,45 @@ namespace ETicaret.Application.Features.Categories.Rules
             if (parentCategory is null || parentCategory.IsDeleted)
                 throw new BusinessRuleException(CategoryErrors.ParentCategoryNotFound);
         }
+
+
+        public async Task<CategoryEntity> CategoryMustExist(Guid categoryId)
+        {
+            var category = await _unitofWork
+                .GetReadRepository<CategoryEntity>()
+                .GetByIdAsync(categoryId, true);
+
+            if (category == null || category.IsDeleted)
+                throw new BusinessRuleException(CategoryErrors.CategoryNotFound);
+
+            return category;
+        }
+        public async Task CategoryNameMustBeUniqueForUpdate(Guid categoryId, string categoryName)
+        {
+            var exists = await _unitofWork
+                .GetReadRepository<CategoryEntity>()
+                .GetSingleAsync(x => x.Id != categoryId && x.Name == categoryName && !x.IsDeleted, false);
+
+            if (exists is not null)
+                throw new BusinessRuleException(CategoryErrors.NameAlreadyExists);
+        }
+        public async Task CategorySlugMustBeUniqueForUpdate(Guid categoryId, string categorySlug)
+        {
+            var exists = await _unitofWork.GetReadRepository<CategoryEntity>()
+                .GetSingleAsync(x =>
+                x.Id != categoryId &&
+                x.Slug == categorySlug &&
+                !x.IsDeleted, false);
+            if (exists is not null)
+                throw new BusinessRuleException(CategoryErrors.SlugAlreadyExists);
+        }
+
+        public Task CategoryMustNotBeParentOfItself(Guid categoryId, Guid? parentCategoryId)
+        {
+            if (parentCategoryId == categoryId)
+                throw new BusinessRuleException(CategoryErrors.CategoryCannotBeParentOfItself);
+            return Task.CompletedTask;
+        }
+
     }
 }

@@ -28,7 +28,8 @@ namespace ETicaret.Application.Common.Exceptions
                 [CategoryErrors.NameAlreadyExists] = "Bu kategori adı zaten kullanılıyor",
                 [CategoryErrors.SlugAlreadyExists] = "Bu kategori slug değeri zaten kullanılıyor",
                 [CategoryErrors.ParentCategoryNotFound] = "Üst kategori bulunamadı",
-
+                [CategoryErrors.CategoryNotFound] = "Kategori bulunamadı",
+                [CategoryErrors.CategoryCannotBeParentOfItself] = "Kategori kendi üst kategorisi olamaz.",
 
             };
         public static string Get(string key)
