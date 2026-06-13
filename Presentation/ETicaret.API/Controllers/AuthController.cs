@@ -1,4 +1,5 @@
-﻿using ETicaret.Application.Features.Auth.Commands.LoginUser;
+﻿using ETicaret.API.Attributes;
+using ETicaret.Application.Features.Auth.Commands.LoginUser;
 using ETicaret.Application.Features.Auth.Commands.Logout;
 using ETicaret.Application.Features.Auth.Commands.RefreshToken;
 using MediatR;
@@ -30,7 +31,7 @@ namespace ETicaret.API.Controllers
             RefreshTokenCommandResponse response = await _mediator.Send(refreshTokenCommandRequest);
             return Ok(response);
         }
-        [Authorize]
+        [JwtAuthorize]
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
         {
