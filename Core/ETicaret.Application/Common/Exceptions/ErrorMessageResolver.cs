@@ -31,6 +31,11 @@ namespace ETicaret.Application.Common.Exceptions
                 [CategoryErrors.CategoryNotFound] = "Kategori bulunamadı",
                 [CategoryErrors.CategoryCannotBeParentOfItself] = "Kategori kendi üst kategorisi olamaz.",
 
+                [ProductErrors.SlugAlreadyExists] = "Bu ürün slug değeri zaten kullanılıyor.",
+                [ProductErrors.SkuAlreadyExists] = "Bu ürün SKU değeri zaten kullanılıyor.",
+                [ProductErrors.CategoryNotFound] = "Ürünün bağlı olduğu kategori bulunamadı.",
+                [ProductErrors.DiscountPriceMustBeLessThanPrice] = "İndirimli fiyat, ürün fiyatından düşük olmalıdır.",
+                [ProductErrors.ProductNotFound] = "Ürün bulunamadı",
             };
         public static string Get(string key)
             => Messages.TryGetValue(key, out var value)

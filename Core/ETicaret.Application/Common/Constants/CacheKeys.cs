@@ -14,5 +14,6 @@
     {
         internal static readonly CacheKeySettings AllUsers = new("get_all_users", 5);
         internal static readonly CacheKeySettings AllCategories = new("get_all_categories", 10);
+        internal static readonly CacheKeySettings AllProducts = new("get_all_products", 10);
     }
 }
