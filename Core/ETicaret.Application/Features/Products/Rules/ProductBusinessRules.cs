@@ -13,6 +13,18 @@ namespace ETicaret.Application.Features.Products.Rules
         {
             _unitOfWork = unitOfWork;
         }
+        public async Task<ProductEntity> ProductMustExist(Guid productId)
+        {
+            var product = await _unitOfWork
+                .GetReadRepository<ProductEntity>()
+                .GetSingleAsync(x =>
+                x.Id == productId, true);
+
+            if (product == null || product.IsDeleted)
+                throw new BusinessRuleException(ProductErrors.ProductNotFound);
+
+            return product;
+        }
         public async Task ProductSlugMustBeUnique(string slug)
         {
             var exists = await _unitOfWork
@@ -42,6 +54,30 @@ namespace ETicaret.Application.Features.Products.Rules
             if (discountPrice.HasValue && discountPrice.Value >= price)
                 throw new BusinessRuleException(ProductErrors.DiscountPriceMustBeLessThanPrice);
             return Task.CompletedTask;
+        }
+        public async Task ProductSlugMustBeUniqueForUpdate(Guid productId, string slug)
+        {
+            var exists = await _unitOfWork
+                .GetReadRepository<ProductEntity>()
+                .GetSingleAsync(x =>
+                x.Id != productId &&
+                x.Slug == slug &&
+                !x.IsDeleted, false);
+
+            if (exists is not null)
+                throw new BusinessRuleException(ProductErrors.SlugAlreadyExists);
+        }
+
+        public async Task ProductSkuMustBeUniqueForUpdate(Guid productId, string sku)
+        {
+            var exists = await _unitOfWork
+                 .GetReadRepository<ProductEntity>()
+                 .GetSingleAsync(x => x.Id != productId &&
+                 x.SKU == sku &&
+                 !x.IsDeleted, false);
+
+            if (exists is not null)
+                throw new BusinessRuleException(ProductErrors.SkuAlreadyExists);
         }
     }
 }

@@ -1,13 +1,14 @@
 ﻿using ETicaret.Application.Common.Validation;
+using ETicaret.Domain.Entities.Catalog;
 using FluentValidation;
 
-namespace ETicaret.Application.Features.Products.Commands.CreateProduct
+namespace ETicaret.Application.Features.Products.Commands.UpdateProduct
 {
-    public class CreateProductCommandValidator : AbstractValidator<CreateProductCommandRequest>
+    public class UpdateProductCommandValidator : AbstractValidator<UpdateProductCommandRequest>
     {
-        public CreateProductCommandValidator()
+        public UpdateProductCommandValidator()
         {
-            RuleFor(x => x.CategoryId).CategoryId();
+            RuleFor(x => x.Id).ProductId();
             RuleFor(x => x.Name).ProductName();
             RuleFor(x => x.Slug).ProductSlug();
             RuleFor(x => x.Description).ProductDescription();
@@ -15,6 +16,8 @@ namespace ETicaret.Application.Features.Products.Commands.CreateProduct
             RuleFor(x => x.Price).ProductPrice();
             RuleFor(x => x.DiscountPrice).ProductDiscountPrice();
             RuleFor(x => x.StockQuantity).ProductStockQuantity();
+            RuleFor(x => x.CategoryId).CategoryId();
+
         }
     }
 }

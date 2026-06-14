@@ -3,10 +3,11 @@ using ETicaret.Application.Common.Constants;
 using ETicaret.Application.Features.Products.Commands.Common;
 using MediatR;
 
-namespace ETicaret.Application.Features.Products.Commands.CreateProduct
+namespace ETicaret.Application.Features.Products.Commands.UpdateProduct
 {
-    public class CreateProductCommandRequest : ProductCommandBase, IRequest<CreateProductCommandResponse>, IInvalidateCache
+    public class UpdateProductCommandRequest : ProductCommandBase, IRequest<UpdateProductCommandResponse>, IInvalidateCache
     {
+        public Guid Id { get; set; }
         public string InvalidateCacheKeyPrefix => CacheKeys.AllProducts.Key;
     }
 }
