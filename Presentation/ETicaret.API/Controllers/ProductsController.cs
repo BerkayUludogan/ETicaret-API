@@ -30,9 +30,9 @@ namespace ETicaret.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] GetProductsQueryRequest request)
         {
-            var response = await _mediator.Send(new GetProductsQueryRequest());
+            var response = await _mediator.Send(request);
             return Ok(response);
         }
 
