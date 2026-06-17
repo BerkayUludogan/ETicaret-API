@@ -52,7 +52,9 @@ namespace ETicaret.API.Controllers
         }
         [JwtAuthorize]
         [HttpPut("items/{basketItemId:guid}")]
-        public async Task<IActionResult> UpdateItemQuantity(Guid basketItemId, UpdateBasketItemQuantityCommandRequest request)
+        public async Task<IActionResult> UpdateItemQuantity(
+          [FromRoute] Guid basketItemId,
+          [FromBody] UpdateBasketItemQuantityCommandRequest request)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 

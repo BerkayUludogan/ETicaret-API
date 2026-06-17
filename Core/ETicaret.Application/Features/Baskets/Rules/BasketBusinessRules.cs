@@ -35,15 +35,18 @@ namespace ETicaret.Application.Features.Baskets.Rules
         {
             var basketItem = await _unitOfWork
                 .GetReadRepository<BasketItemEntity>()
-                .GetSingleAsync(x =>
-                x.Id == basketItemId &&
-                !x.IsDeleted &&
-                x.Basket.UserId == userId &&
-                !x.Basket.IsDeleted, true);
+                .GetWhere(x =>
+                    x.Id == basketItemId &&
+                    !x.IsDeleted,
+                    true)
+                .Include(x => x.Basket)
+                .FirstOrDefaultAsync(x =>
+                    x.Basket.UserId == userId &&
+                    !x.Basket.IsDeleted);
 
-            if (basketItem == null)
+            if (basketItem is null)
                 throw new BusinessRuleException(BasketErrors.BasketItemNotFound);
-            
+
             return basketItem;
         }
 
@@ -51,8 +54,8 @@ namespace ETicaret.Application.Features.Baskets.Rules
         {
             var basket = await _unitOfWork
                 .GetReadRepository<BasketEntity>()
-                .GetWhere(x=>x.UserId == userId && !x.IsDeleted,true)
-                .Include(x=>x.Items).FirstOrDefaultAsync();
+                .GetWhere(x => x.UserId == userId && !x.IsDeleted, true)
+                .Include(x => x.Items).FirstOrDefaultAsync();
 
             if (basket is null)
                 throw new BusinessRuleException(BasketErrors.BasketNotFound);
