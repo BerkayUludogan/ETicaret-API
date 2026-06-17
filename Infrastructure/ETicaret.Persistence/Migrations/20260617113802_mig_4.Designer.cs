@@ -4,6 +4,7 @@ using ETicaret.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ETicaret.Persistence.Migrations
 {
     [DbContext(typeof(ETicaretContext))]
-    partial class ETicaretContextModelSnapshot : ModelSnapshot
+    [Migration("20260617113802_mig_4")]
+    partial class mig_4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -123,8 +126,7 @@ namespace ETicaret.Persistence.Migrations
                     b.HasIndex("ProductId");
 
                     b.HasIndex("BasketId", "ProductId")
-                        .IsUnique()
-                        .HasFilter("[IsDeleted] = 0");
+                        .IsUnique();
 
                     b.ToTable("BasketItems", null, t =>
                         {
