@@ -1,6 +1,7 @@
 ﻿
 using ETicaret.API.Attributes;
 using ETicaret.Application.Features.Baskets.Commands.AddBasketItem;
+using ETicaret.Application.Features.Baskets.Commands.RemoveBasketItem;
 using ETicaret.Application.Features.Baskets.Commands.UpdateBasketItemQuantity;
 using ETicaret.Application.Features.Baskets.Queries.GetMyBasket;
 using MediatR;
@@ -61,6 +62,23 @@ namespace ETicaret.API.Controllers
             request.BasketItemId = basketItemId;
 
             var response = await _mediator.Send(request);
+
+            return Ok(response);
+        }
+        [JwtAuthorize]
+        [HttpDelete("items/{basketItemId:guid}")]
+        public async Task<IActionResult> Delete(Guid basketItemId)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrWhiteSpace(userId))
+                return Unauthorized();
+
+            var response = await _mediator.Send(new RemoveBasketItemCommandRequest
+            {
+                UserId = Guid.Parse(userId),
+                BasketItemId = basketItemId
+            });
 
             return Ok(response);
         }
