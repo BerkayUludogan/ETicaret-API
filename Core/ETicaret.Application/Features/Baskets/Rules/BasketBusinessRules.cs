@@ -3,6 +3,7 @@ using ETicaret.Application.Common.Exceptions;
 using ETicaret.Application.Common.Exceptions.Errors;
 using ETicaret.Domain.Entities.Basket;
 using ETicaret.Domain.Entities.Catalog;
+using Microsoft.EntityFrameworkCore;
 
 namespace ETicaret.Application.Features.Baskets.Rules
 {
@@ -46,5 +47,17 @@ namespace ETicaret.Application.Features.Baskets.Rules
             return basketItem;
         }
 
+        public async Task<BasketEntity> BasketMustExistAsync(Guid userId)
+        {
+            var basket = await _unitOfWork
+                .GetReadRepository<BasketEntity>()
+                .GetWhere(x=>x.UserId == userId && !x.IsDeleted,true)
+                .Include(x=>x.Items).FirstOrDefaultAsync();
+
+            if (basket is null)
+                throw new BusinessRuleException(BasketErrors.BasketNotFound);
+
+            return basket;
+        }
     }
 }

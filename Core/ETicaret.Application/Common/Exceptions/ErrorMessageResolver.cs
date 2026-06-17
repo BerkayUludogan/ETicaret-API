@@ -39,6 +39,7 @@ namespace ETicaret.Application.Common.Exceptions
                 [ProductErrors.ProductStockNotEnough] = "Ürün stoğu yeterli değil.",
 
                 [BasketErrors.BasketItemNotFound] = "Sepetteki ürün bulunamadı.",
+                [BasketErrors.BasketNotFound] = "Sepet bulunamadı.",
             };
         public static string Get(string key)
             => Messages.TryGetValue(key, out var value)
