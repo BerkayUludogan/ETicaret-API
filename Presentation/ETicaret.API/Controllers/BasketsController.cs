@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using ETicaret.API.Attributes;
 using System.Security.Claims;
 using ETicaret.Application.Features.Baskets.Queries.GetMyBasket;
+using ETicaret.Application.Features.Baskets.Commands.AddBasketItem;
 namespace ETicaret.API.Controllers
 {
     [Route("api/[controller]")]
@@ -29,6 +30,21 @@ namespace ETicaret.API.Controllers
             {
                 UserId = Guid.Parse(userId)
             });
+            return Ok(response);
+        }
+        [JwtAuthorize]
+        [HttpPost("items")]
+        public async Task<IActionResult> AddItem(AddBasketItemCommandRequest request)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrWhiteSpace(userId))
+                return Unauthorized();
+
+            request.UserId = Guid.Parse(userId);
+
+            var response = await _mediator.Send(request);
+
             return Ok(response);
         }
     }

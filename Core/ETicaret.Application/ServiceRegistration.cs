@@ -1,5 +1,6 @@
 ﻿using ETicaret.Application.Common.Behaviors;
 using ETicaret.Application.Features.Auth.Rules;
+using ETicaret.Application.Features.Baskets.Rules;
 using ETicaret.Application.Features.Categories.Rules;
 using ETicaret.Application.Features.Products.Rules;
 using ETicaret.Application.Features.Users.Rules;
@@ -29,6 +30,7 @@ namespace ETicaret.Application
             services.AddScoped<IAuthBusinessRules,AuthBusinessRules>();
             services.AddScoped<ICategoryBusinessRules,CategoryBusinessRules>();
             services.AddScoped<IProductBusinessRules,ProductBusinessRules>();
+            services.AddScoped<IBasketBusinessRules,BasketBusinessRules>();
 
 
         }

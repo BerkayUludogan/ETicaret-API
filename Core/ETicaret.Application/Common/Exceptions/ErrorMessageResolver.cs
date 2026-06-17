@@ -36,6 +36,9 @@ namespace ETicaret.Application.Common.Exceptions
                 [ProductErrors.CategoryNotFound] = "Ürünün bağlı olduğu kategori bulunamadı.",
                 [ProductErrors.DiscountPriceMustBeLessThanPrice] = "İndirimli fiyat, ürün fiyatından düşük olmalıdır.",
                 [ProductErrors.ProductNotFound] = "Ürün bulunamadı",
+                [ProductErrors.ProductStockNotEnough] = "Ürün stoğu yeterli değil.",
+
+                [BasketErrors.BasketItemNotFound] = "Sepetteki ürün bulunamadı.",
             };
         public static string Get(string key)
             => Messages.TryGetValue(key, out var value)

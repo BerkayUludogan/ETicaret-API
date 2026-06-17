@@ -7,5 +7,6 @@
         public const string SkuAlreadyExists = "Product.SkuAlreadyExists";
         public const string CategoryNotFound = "Product.CategoryNotFound";
         public const string DiscountPriceMustBeLessThanPrice = "Product.DiscountPriceMustBeLessThanPrice";
+        public const string ProductStockNotEnough = "Product.ProductStockNotEnough";
     }
 }
