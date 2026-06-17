@@ -22,13 +22,13 @@ namespace ETicaret.Application.Features.Baskets.Queries.GetMyBasket
                 .GetWhere(x => x.UserId == request.UserId && !x.IsDeleted, false)
                 .Select(x => new BasketDto
                 {
-                    Id = x.Id,
+                    BasketId = x.Id,
                     UserId = x.UserId,
                     Items = x.Items
                     .Where(y => !y.IsDeleted)
                     .Select(y => new BasketItemDto
                     {
-                        Id = y.Id,
+                        BasketItemId = y.Id,
                         ProductId = y.ProductId,
                         ProductName = y.Product.Name,
                         ProductSlug = y.Product.Slug,
