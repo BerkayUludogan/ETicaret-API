@@ -1,4 +1,5 @@
 ﻿using ETicaret.Domain.Entities.Auth;
+using ETicaret.Domain.Entities.Basket;
 using ETicaret.Domain.Entities.Catalog;
 using ETicaret.Domain.Entities.Common;
 using ETicaret.Domain.Entities.Identity;
@@ -17,6 +18,8 @@ namespace ETicaret.Persistence.Context
         public DbSet<UserLoginAuditEntity> UserLoginAudits { get; set; }
         public DbSet<ProductEntity> Products { get; set; }
         public DbSet<CategoryEntity> Categories { get; set; }
+        public DbSet<BasketEntity> Baskets { get; set; }
+        public DbSet<BasketItemEntity> BasketItems{ get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
