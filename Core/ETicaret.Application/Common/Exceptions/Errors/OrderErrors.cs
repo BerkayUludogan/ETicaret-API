@@ -5,5 +5,6 @@
         public const string BasketIsEmpty = "Order.BasketIsEmpty";
         public const string BasketNotFound = "Order.BasketNotFound";
         public const string ProductStockNotEnough = "Order.ProductStockNotEnough";
+        public const string OrderNotFound = "Order.OrderNotFound";
     }
 }

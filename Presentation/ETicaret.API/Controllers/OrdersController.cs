@@ -3,6 +3,7 @@ using ETicaret.API.Extensions;
 using ETicaret.Application.Common.Enums;
 using ETicaret.Application.Features.Orders.Commands.CreateOrderFromBasket;
 using ETicaret.Application.Features.Orders.Queries.GetMyOrders;
+using ETicaret.Application.Features.Orders.Queries.GetOrderById;
 using ETicaret.Application.Features.Orders.Queries.GetOrders;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -54,6 +55,24 @@ namespace ETicaret.API.Controllers
             var response = await _mediator.Send(new GetMyOrdersQueryRequest
             {
                 UserId = userId.Value
+            });
+
+            return Ok(response);
+        }
+        [JwtAuthorize]
+        [HttpGet("{orderId:guid}")]
+        public async Task<IActionResult> GetById(Guid orderId)
+        {
+            var userId = User.GetUserId();
+
+            if (userId is null)
+                return Unauthorized();
+
+            var response = await _mediator.Send(new GetOrderByIdQueryRequest
+            {
+                OrderId = orderId,
+                UserId = userId.Value,
+                IsAdmin = User.IsInRole(RoleNames.Admin)
             });
 
             return Ok(response);
