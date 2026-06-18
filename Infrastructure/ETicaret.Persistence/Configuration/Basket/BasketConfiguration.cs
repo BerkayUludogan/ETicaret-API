@@ -1,7 +1,7 @@
 ﻿using ETicaret.Domain.Entities.Basket;
 using ETicaret.Persistence.Configuration.Common;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders; 
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ETicaret.Persistence.Configuration.Basket
 {
@@ -12,7 +12,7 @@ namespace ETicaret.Persistence.Configuration.Basket
             base.Configure(builder);
             builder.ToTable("Baskets");
 
-            builder.HasIndex(x=>x.UserId)
+            builder.HasIndex(x => x.UserId)
                 .IsUnique();
 
             builder.HasOne(x => x.User)
