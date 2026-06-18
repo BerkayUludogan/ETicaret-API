@@ -1,8 +1,9 @@
 ﻿using ETicaret.Application.Common.Abstractions.UnitOfWorks;
 using ETicaret.Application.Common.Exceptions;
 using ETicaret.Application.Common.Exceptions.Errors;
-using ETicaret.Application.Features.Baskets.Rules;
 using ETicaret.Domain.Entities.Basket;
+using ETicaret.Domain.Entities.Order;
+using ETicaret.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace ETicaret.Application.Features.Orders.Rules
@@ -42,6 +43,24 @@ namespace ETicaret.Application.Features.Orders.Rules
                 throw new BusinessRuleException(OrderErrors.BasketNotFound);
 
             return basket;
+        }
+        public async Task<OrderEntity> OrderMustExist(Guid orderId)
+        {
+            var order = await _unitOfWork
+                .GetReadRepository<OrderEntity>()
+                .GetWhere(x => x.Id == orderId && !x.IsDeleted, true)
+                .FirstOrDefaultAsync();
+
+            if (order is null)
+                throw new BusinessRuleException(OrderErrors.OrderNotFound);
+
+            return order;
+        }
+
+        public void CompletedOrderStatusCannotBeChanged(OrderEntity order)
+        {
+            if (order.Status == OrderStatus.Delivered || order.Status == OrderStatus.Cancelled)
+                throw new BusinessRuleException(OrderErrors.CompletedOrderStatusCannotBeChanged);
         }
     }
 }

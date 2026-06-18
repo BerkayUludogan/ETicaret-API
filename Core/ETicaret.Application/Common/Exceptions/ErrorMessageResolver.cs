@@ -45,6 +45,7 @@ namespace ETicaret.Application.Common.Exceptions
                 [OrderErrors.BasketIsEmpty] = "Sepet boş olduğu için sipariş oluşturulamaz.",
                 [OrderErrors.ProductStockNotEnough] = "Ürün stoğu sipariş için yeterli değil.",
                 [OrderErrors.OrderNotFound] = "Sipariş bulunamadı.",
+                [OrderErrors.CompletedOrderStatusCannotBeChanged] = "Tamamlanmış veya iptal edilmiş siparişin durumu değiştirilemez.",
 
             };
         public static string Get(string key)

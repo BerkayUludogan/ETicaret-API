@@ -2,6 +2,7 @@
 using ETicaret.API.Extensions;
 using ETicaret.Application.Common.Enums;
 using ETicaret.Application.Features.Orders.Commands.CreateOrderFromBasket;
+using ETicaret.Application.Features.Orders.Commands.UpdateOrderStatus;
 using ETicaret.Application.Features.Orders.Queries.GetMyOrders;
 using ETicaret.Application.Features.Orders.Queries.GetOrderById;
 using ETicaret.Application.Features.Orders.Queries.GetOrders;
@@ -74,6 +75,16 @@ namespace ETicaret.API.Controllers
                 UserId = userId.Value,
                 IsAdmin = User.IsInRole(RoleNames.Admin)
             });
+
+            return Ok(response);
+        }
+        [JwtAuthorize(RoleNames.Admin)]
+        [HttpPut("{orderId:guid}/status")]
+        public async Task<IActionResult> UpdateStatus(Guid orderId, UpdateOrderStatusCommandRequest request)
+        {
+            request.OrderId = orderId;
+
+            var response = await _mediator.Send(request);
 
             return Ok(response);
         }
