@@ -1,8 +1,11 @@
 ﻿using ETicaret.API.Attributes;
+using ETicaret.API.Extensions;
+using ETicaret.Application.Common.Enums;
 using ETicaret.Application.Features.Orders.Commands.CreateOrderFromBasket;
+using ETicaret.Application.Features.Orders.Queries.GetMyOrders;
+using ETicaret.Application.Features.Orders.Queries.GetOrders;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace ETicaret.API.Controllers
 {
@@ -21,14 +24,37 @@ namespace ETicaret.API.Controllers
         [HttpPost("from-basket")]
         public async Task<IActionResult> CreateFromBasket(CreateOrderFromBasketCommandRequest request)
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userId = User.GetUserId();
 
-            if (string.IsNullOrWhiteSpace(userId))
+            if (userId is null)
                 return Unauthorized();
 
-            request.UserId = Guid.Parse(userId);
-
+            request.UserId = userId.Value;
             var response = await _mediator.Send(request);
+
+            return Ok(response);
+        }
+        [JwtAuthorize(RoleNames.Admin)]
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var response = await _mediator.Send(new GetOrdersQueryRequest());
+
+            return Ok(response);
+        }
+        [JwtAuthorize]
+        [HttpGet("my-orders")]
+        public async Task<IActionResult> GetMyOrders()
+        {
+            var userId = User.GetUserId();
+
+            if (userId is null)
+                return Unauthorized();
+
+            var response = await _mediator.Send(new GetMyOrdersQueryRequest
+            {
+                UserId = userId.Value
+            });
 
             return Ok(response);
         }
