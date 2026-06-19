@@ -23,6 +23,7 @@ namespace ETicaret.Persistence.Context
         public DbSet<BasketItemEntity> BasketItems { get; set; }
         public DbSet<OrderEntity> Orders { get; set; }
         public DbSet<OrderItemEntity> OrderItems { get; set; }
+        public DbSet<OrderStatusHistoryEntity> OrderStatusHistories { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)

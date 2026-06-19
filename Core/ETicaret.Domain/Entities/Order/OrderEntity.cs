@@ -12,6 +12,8 @@ namespace ETicaret.Domain.Entities.Order
         public decimal TotalPrice { get; set; }
         public string ShippingAddress { get; set; } = string.Empty;
         public ICollection<OrderItemEntity> Items { get; set; } = [];
+        public ICollection<OrderStatusHistoryEntity> StatusHistories { get; set; } = [];
+
 
     }
 }

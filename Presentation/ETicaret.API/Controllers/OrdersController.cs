@@ -83,7 +83,13 @@ namespace ETicaret.API.Controllers
         [HttpPut("{orderId:guid}/status")]
         public async Task<IActionResult> UpdateStatus(Guid orderId, UpdateOrderStatusCommandRequest request)
         {
+            var userId = User.GetUserId();
+
+            if (userId is null)
+                return Unauthorized();
+
             request.OrderId = orderId;
+            request.ChangedByUserId = userId.Value;
 
             var response = await _mediator.Send(request);
 
@@ -93,9 +99,15 @@ namespace ETicaret.API.Controllers
         [HttpPut("{orderId:guid}/cancel")]
         public async Task<IActionResult> Cancel(Guid orderId)
         {
+            var userId = User.GetUserId();
+
+            if (userId is null)
+                return Unauthorized();
+
             var response = await _mediator.Send(new CancelOrderCommandRequest
             {
-                OrderId = orderId
+                OrderId = orderId,
+                ChangedByUserId = userId.Value
             });
 
             return Ok(response);

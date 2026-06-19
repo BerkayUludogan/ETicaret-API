@@ -10,6 +10,9 @@ namespace ETicaret.Application.Features.Orders.Commands.UpdateOrderStatus
         [JsonIgnore]
         [BindNever]
         public Guid OrderId { get; set; }
+        [JsonIgnore]
+        [BindNever]
+        public Guid? ChangedByUserId { get; set; }
         public OrderStatus Status { get; set; }
     }
 }

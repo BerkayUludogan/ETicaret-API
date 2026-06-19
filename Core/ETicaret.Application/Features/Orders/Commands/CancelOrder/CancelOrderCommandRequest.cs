@@ -9,5 +9,8 @@ namespace ETicaret.Application.Features.Orders.Commands.CancelOrder
         [JsonIgnore]
         [BindNever]
         public Guid OrderId { get; set; }
+        [JsonIgnore]
+        [BindNever]
+        public Guid? ChangedByUserId { get; set; }
     }
 }

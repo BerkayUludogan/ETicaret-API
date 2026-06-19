@@ -25,7 +25,7 @@ namespace ETicaret.Application.Features.Orders.Commands.CancelOrder
             try
             {
                 var order = await _orderBusinessRules.OrderMustExistWithItems(request.OrderId);
-
+                var oldStatus = order.Status;
                 _orderBusinessRules.CompletedOrderStatusCannotBeChanged(order);
 
                 foreach (var item in order.Items)
@@ -36,12 +36,21 @@ namespace ETicaret.Application.Features.Orders.Commands.CancelOrder
                 order.Status = OrderStatus.Cancelled;
                 order.ModifiedDate = DateTime.UtcNow;
 
+                var history = new OrderStatusHistoryEntity
+                {
+                    OrderId = order.Id,
+                    OldStatus = oldStatus,
+                    NewStatus = order.Status,
+                    ChangedByUserId = request.ChangedByUserId
+                };
+
                 _unitOfWork.GetWriteRepository<ProductEntity>()
                     .UpdateRange(order.Items.Select(x => x.Product).ToList());
 
                 _unitOfWork.GetWriteRepository<OrderEntity>()
                     .Update(order);
-
+                await _unitOfWork.GetWriteRepository<OrderStatusHistoryEntity>()
+                    .AddAsync(history);
                 await _unitOfWork.SaveAsync();
                 await _unitOfWork.CommitTransactionAsync();
 
@@ -52,7 +61,7 @@ namespace ETicaret.Application.Features.Orders.Commands.CancelOrder
                 };
 
             }
-            catch (Exception)
+            catch
             {
                 await _unitOfWork.RollbackTransactionAsync();
                 throw;
