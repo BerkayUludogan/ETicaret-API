@@ -48,7 +48,12 @@ namespace ETicaret.Application.Common.Exceptions
                 [OrderErrors.CompletedOrderStatusCannotBeChanged] = "Tamamlanmış veya iptal edilmiş siparişin durumu değiştirilemez.",
                 [OrderErrors.InvalidOrderStatusTransition] = "Sipariş durumu bu aşamaya geçirilemez.",
 
-                [AddressErrors.AddressNotFound] = "Adres bulunamadı."
+                [AddressErrors.AddressNotFound] = "Adres bulunamadı.",
+
+                [PaymentErrors.OrderNotFoundForPayment] = "Ödeme yapılacak sipariş bulunamadı.",
+                [PaymentErrors.OrderAlreadyPaid] = "Bu sipariş için ödeme zaten yapılmış.",
+                [PaymentErrors.OrderIsNotPending] = "Sadece bekleyen siparişler için ödeme yapılabilir.",
+                [PaymentErrors.PaymentNotFound] = "Ödeme bulunamadı.",
 
             };
         public static string Get(string key)
