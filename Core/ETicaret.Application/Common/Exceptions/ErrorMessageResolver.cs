@@ -53,6 +53,7 @@ namespace ETicaret.Application.Common.Exceptions
                 [PaymentErrors.OrderNotFoundForPayment] = "Ödeme yapılacak sipariş bulunamadı.",
                 [PaymentErrors.OrderAlreadyPaid] = "Bu sipariş için ödeme zaten yapılmış.",
                 [PaymentErrors.OrderIsNotPending] = "Sadece bekleyen siparişler için ödeme yapılabilir.",
+                [PaymentErrors.PaymentNotFound] = "Ödeme bulunamadı.",
 
             };
         public static string Get(string key)
