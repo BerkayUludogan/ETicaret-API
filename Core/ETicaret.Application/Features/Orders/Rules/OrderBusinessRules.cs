@@ -62,5 +62,20 @@ namespace ETicaret.Application.Features.Orders.Rules
             if (order.Status == OrderStatus.Delivered || order.Status == OrderStatus.Cancelled)
                 throw new BusinessRuleException(OrderErrors.CompletedOrderStatusCannotBeChanged);
         }
+
+        public async Task<OrderEntity> OrderMustExistWithItems(Guid orderId)
+        {
+            var order = await _unitOfWork
+                .GetReadRepository<OrderEntity>()
+                .GetWhere(x => x.Id == orderId && !x.IsDeleted, true)
+                .Include(x => x.Items.Where(y => !y.IsDeleted))
+                    .ThenInclude(x => x.Product)
+                .FirstOrDefaultAsync();
+
+            if (order is null)
+                throw new BusinessRuleException(OrderErrors.OrderNotFound);
+
+            return order;
+        }
     }
 }

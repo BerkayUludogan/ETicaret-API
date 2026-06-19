@@ -1,6 +1,7 @@
 ﻿using ETicaret.API.Attributes;
 using ETicaret.API.Extensions;
 using ETicaret.Application.Common.Enums;
+using ETicaret.Application.Features.Orders.Commands.CancelOrder;
 using ETicaret.Application.Features.Orders.Commands.CreateOrderFromBasket;
 using ETicaret.Application.Features.Orders.Commands.UpdateOrderStatus;
 using ETicaret.Application.Features.Orders.Queries.GetMyOrders;
@@ -85,6 +86,17 @@ namespace ETicaret.API.Controllers
             request.OrderId = orderId;
 
             var response = await _mediator.Send(request);
+
+            return Ok(response);
+        }
+        [JwtAuthorize(RoleNames.Admin)]
+        [HttpPut("{orderId:guid}/cancel")]
+        public async Task<IActionResult> Cancel(Guid orderId)
+        {
+            var response = await _mediator.Send(new CancelOrderCommandRequest
+            {
+                OrderId = orderId
+            });
 
             return Ok(response);
         }
