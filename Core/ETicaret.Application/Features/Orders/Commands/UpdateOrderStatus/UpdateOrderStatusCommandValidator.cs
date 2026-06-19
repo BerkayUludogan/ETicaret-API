@@ -12,8 +12,8 @@ namespace ETicaret.Application.Features.Orders.Commands.UpdateOrderStatus
 
             RuleFor(x => x.Status)
                 .IsInEnum()
-                .Must(x => x != OrderStatus.Pending)
-                .WithMessage("Sipariş durumu tekrar Pending yapılamaz.");
+                .Must(x => x != OrderStatus.Pending && x != OrderStatus.Cancelled)
+                .WithMessage("Sipariş durumu bu endpoint üzerinden Pending veya Cancelled yapılamaz.");
         }
     }
 }

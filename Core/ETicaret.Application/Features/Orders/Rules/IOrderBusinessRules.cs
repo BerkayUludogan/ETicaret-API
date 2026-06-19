@@ -1,5 +1,6 @@
 ﻿using ETicaret.Domain.Entities.Basket;
 using ETicaret.Domain.Entities.Order;
+using ETicaret.Domain.Enums;
 
 namespace ETicaret.Application.Features.Orders.Rules
 {
@@ -11,5 +12,6 @@ namespace ETicaret.Application.Features.Orders.Rules
         void ProductStockMustBeEnough(int stockQuantity, int requestedQuantity);
         void CompletedOrderStatusCannotBeChanged(OrderEntity order);
         Task<OrderEntity> OrderMustExistWithItems(Guid orderId);
+        void OrderStatusTransitionMustBeValid(OrderStatus currentStatus, OrderStatus newStatus);
     }
 }

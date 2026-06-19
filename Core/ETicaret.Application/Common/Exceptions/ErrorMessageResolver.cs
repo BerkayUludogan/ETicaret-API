@@ -46,6 +46,7 @@ namespace ETicaret.Application.Common.Exceptions
                 [OrderErrors.ProductStockNotEnough] = "Ürün stoğu sipariş için yeterli değil.",
                 [OrderErrors.OrderNotFound] = "Sipariş bulunamadı.",
                 [OrderErrors.CompletedOrderStatusCannotBeChanged] = "Tamamlanmış veya iptal edilmiş siparişin durumu değiştirilemez.",
+                [OrderErrors.InvalidOrderStatusTransition] = "Sipariş durumu bu aşamaya geçirilemez.",
 
             };
         public static string Get(string key)

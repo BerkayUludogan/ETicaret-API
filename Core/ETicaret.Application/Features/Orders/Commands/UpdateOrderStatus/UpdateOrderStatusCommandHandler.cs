@@ -20,7 +20,9 @@ namespace ETicaret.Application.Features.Orders.Commands.UpdateOrderStatus
         {
             var order = await _rules.OrderMustExist(request.OrderId);
             var oldStatus = order.Status;
+
             _rules.CompletedOrderStatusCannotBeChanged(order);
+            _rules.OrderStatusTransitionMustBeValid(order.Status, request.Status);
 
             order.Status = request.Status;
             order.ModifiedDate = DateTime.UtcNow;

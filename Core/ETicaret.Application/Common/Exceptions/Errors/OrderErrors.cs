@@ -7,5 +7,6 @@
         public const string ProductStockNotEnough = "Order.ProductStockNotEnough";
         public const string OrderNotFound = "Order.OrderNotFound";
         public const string CompletedOrderStatusCannotBeChanged = "Order.CompletedOrderStatusCannotBeChanged";
+        public const string InvalidOrderStatusTransition = "Order.InvalidOrderStatusTransition";
     }
 }

@@ -77,5 +77,19 @@ namespace ETicaret.Application.Features.Orders.Rules
 
             return order;
         }
+
+        public void OrderStatusTransitionMustBeValid(OrderStatus currentStatus, OrderStatus newStatus)
+        {
+            var isValidTransition = currentStatus switch
+            {
+                OrderStatus.Pending => newStatus == OrderStatus.Paid,
+                OrderStatus.Paid => newStatus == OrderStatus.Preparing,
+                OrderStatus.Preparing => newStatus == OrderStatus.Shipped,
+                OrderStatus.Shipped => newStatus == OrderStatus.Delivered,
+                _ => false
+            };
+            if (!isValidTransition)
+                throw new BusinessRuleException(OrderErrors.InvalidOrderStatusTransition);
+        }
     }
 }
