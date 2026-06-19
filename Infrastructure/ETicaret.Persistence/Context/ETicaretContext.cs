@@ -5,6 +5,7 @@ using ETicaret.Domain.Entities.Catalog;
 using ETicaret.Domain.Entities.Common;
 using ETicaret.Domain.Entities.Identity;
 using ETicaret.Domain.Entities.Order;
+using ETicaret.Domain.Entities.Payment;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -26,6 +27,7 @@ namespace ETicaret.Persistence.Context
         public DbSet<OrderItemEntity> OrderItems { get; set; }
         public DbSet<OrderStatusHistoryEntity> OrderStatusHistories { get; set; }
         public DbSet<AddressEntity> Addresses { get; set; }
+        public DbSet<PaymentEntity> Payments { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
