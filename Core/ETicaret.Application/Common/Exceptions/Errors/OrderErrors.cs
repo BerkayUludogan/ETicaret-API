@@ -8,5 +8,6 @@
         public const string OrderNotFound = "Order.OrderNotFound";
         public const string CompletedOrderStatusCannotBeChanged = "Order.CompletedOrderStatusCannotBeChanged";
         public const string InvalidOrderStatusTransition = "Order.InvalidOrderStatusTransition";
+        public const string OrderCannotBeShipped = "Order.OrderCannotBeShipped";
     }
 }

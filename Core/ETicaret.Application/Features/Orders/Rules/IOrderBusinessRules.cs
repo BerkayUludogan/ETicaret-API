@@ -13,5 +13,6 @@ namespace ETicaret.Application.Features.Orders.Rules
         void CompletedOrderStatusCannotBeChanged(OrderEntity order);
         Task<OrderEntity> OrderMustExistWithItems(Guid orderId);
         void OrderStatusTransitionMustBeValid(OrderStatus currentStatus, OrderStatus newStatus);
+        void OrderMustBeShippable(OrderEntity order);
     }
 }

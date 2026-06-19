@@ -47,6 +47,7 @@ namespace ETicaret.Application.Common.Exceptions
                 [OrderErrors.OrderNotFound] = "Sipariş bulunamadı.",
                 [OrderErrors.CompletedOrderStatusCannotBeChanged] = "Tamamlanmış veya iptal edilmiş siparişin durumu değiştirilemez.",
                 [OrderErrors.InvalidOrderStatusTransition] = "Sipariş durumu bu aşamaya geçirilemez.",
+                [OrderErrors.OrderCannotBeShipped] = "Sadece ödemesi alınmış veya hazırlanan siparişler kargoya verilebilir.",
 
                 [AddressErrors.AddressNotFound] = "Adres bulunamadı.",
 

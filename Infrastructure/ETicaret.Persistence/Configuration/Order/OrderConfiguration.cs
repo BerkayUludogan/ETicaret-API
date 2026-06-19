@@ -30,6 +30,15 @@ namespace ETicaret.Persistence.Configuration.Order
                 .IsRequired()
                 .HasMaxLength(OrderFieldLengths.ShippingAddress);
 
+            builder.Property(x => x.CargoCompany)
+                .HasMaxLength(OrderFieldLengths.CargoCompany);
+
+            builder.Property(x => x.TrackingNumber)
+                .HasMaxLength(OrderFieldLengths.TrackingNumber);
+
+            builder.Property(x => x.ShippedDate)
+                .IsRequired(false);
+
             builder.HasOne(x => x.User)
                 .WithMany()
                 .HasForeignKey(x => x.UserId)
