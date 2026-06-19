@@ -1,8 +1,11 @@
 ﻿using ETicaret.Application.Common.Abstractions.UnitOfWorks;
+using ETicaret.Application.Features.Addresses.Rules;
 using ETicaret.Application.Features.Orders.Rules;
+using ETicaret.Domain.Entities.Address;
 using ETicaret.Domain.Entities.Basket;
 using ETicaret.Domain.Entities.Catalog;
 using ETicaret.Domain.Entities.Order;
+using ETicaret.Application.Helper;
 using MediatR;
 
 namespace ETicaret.Application.Features.Orders.Commands.CreateOrderFromBasket
@@ -11,11 +14,13 @@ namespace ETicaret.Application.Features.Orders.Commands.CreateOrderFromBasket
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IOrderBusinessRules _orderBusinessRules;
+        private readonly IAddressBusinessRules _addressBusinessRules;
 
-        public CreateOrderFromBasketCommandHandler(IUnitOfWork unitOfWork, IOrderBusinessRules orderBusinessRules)
+        public CreateOrderFromBasketCommandHandler(IUnitOfWork unitOfWork, IOrderBusinessRules orderBusinessRules, IAddressBusinessRules addressBusinessRules)
         {
             _unitOfWork = unitOfWork;
             _orderBusinessRules = orderBusinessRules;
+            _addressBusinessRules = addressBusinessRules;
         }
 
         public async Task<CreateOrderFromBasketCommandResponse> Handle(CreateOrderFromBasketCommandRequest request, CancellationToken cancellationToken)
@@ -24,6 +29,8 @@ namespace ETicaret.Application.Features.Orders.Commands.CreateOrderFromBasket
 
             try
             {
+                var address = await _addressBusinessRules.AddressMustExistForUser(request.UserId, request.AddressId);
+
                 var basket = await _orderBusinessRules
                     .UserBasketMustExistWithItemsAsync(request.UserId);
 
@@ -33,7 +40,7 @@ namespace ETicaret.Application.Features.Orders.Commands.CreateOrderFromBasket
                     _orderBusinessRules.ProductStockMustBeEnough(basketItem.Product.StockQuantity, basketItem.Quantity);
                 }
 
-                var order = CreateOrder(request, basket);
+                var order = CreateOrder(request, basket, address);
 
                 await _unitOfWork
                     .GetWriteRepository<OrderEntity>()
@@ -70,7 +77,7 @@ namespace ETicaret.Application.Features.Orders.Commands.CreateOrderFromBasket
         }
 
         private static OrderEntity CreateOrder(
-            CreateOrderFromBasketCommandRequest request, BasketEntity basket)
+            CreateOrderFromBasketCommandRequest request, BasketEntity basket, AddressEntity address)
         {
             var orderItems = basket.Items
                 .Select(x =>
@@ -92,7 +99,7 @@ namespace ETicaret.Application.Features.Orders.Commands.CreateOrderFromBasket
             return new OrderEntity
             {
                 UserId = request.UserId,
-                ShippingAddress = request.ShippingAddress,
+                ShippingAddress = AddressHelper.BuildShippingAddress(address),
                 Items = orderItems,
                 TotalPrice = orderItems.Sum(x => x.TotalPrice),
             };

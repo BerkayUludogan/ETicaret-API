@@ -9,6 +9,6 @@ namespace ETicaret.Application.Features.Orders.Commands.CreateOrderFromBasket
         [JsonIgnore]
         [BindNever]
         public Guid UserId { get; set; }
-        public string ShippingAddress { get; set; } = string.Empty;
+        public Guid AddressId { get; set; }
     }
 }

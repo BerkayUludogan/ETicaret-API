@@ -1,5 +1,4 @@
-﻿using ETicaret.Application.Common.Constants.FieldLengths;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace ETicaret.Application.Features.Orders.Commands.CreateOrderFromBasket
 {
@@ -7,9 +6,8 @@ namespace ETicaret.Application.Features.Orders.Commands.CreateOrderFromBasket
     {
         public CreateOrderFromBasketCommandValidator()
         {
-            RuleFor(x => x.ShippingAddress)
-                .NotEmpty()
-                .MaximumLength(OrderFieldLengths.ShippingAddress);
+            RuleFor(x => x.AddressId)
+                .NotEmpty();
         }
     }
 }
