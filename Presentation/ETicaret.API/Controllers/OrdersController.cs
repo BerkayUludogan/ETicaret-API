@@ -3,6 +3,7 @@ using ETicaret.API.Extensions;
 using ETicaret.Application.Common.Enums;
 using ETicaret.Application.Features.Orders.Commands.CancelOrder;
 using ETicaret.Application.Features.Orders.Commands.CreateOrderFromBasket;
+using ETicaret.Application.Features.Orders.Commands.ShipOrder;
 using ETicaret.Application.Features.Orders.Commands.UpdateOrderStatus;
 using ETicaret.Application.Features.Orders.Queries.GetMyOrders;
 using ETicaret.Application.Features.Orders.Queries.GetOrderById;
@@ -97,6 +98,22 @@ namespace ETicaret.API.Controllers
             return Ok(response);
         }
         [JwtAuthorize(RoleNames.Admin)]
+        [HttpPut("{orderId:guid}/ship")]
+        public async Task<IActionResult> Ship(Guid orderId, ShipOrderCommandRequest request)
+        {
+            var userId = User.GetUserId();
+
+            if (userId is null)
+                return Unauthorized();
+
+            request.OrderId = orderId;
+            request.ChangedByUserId = userId.Value;
+
+            var response = await _mediator.Send(request);
+
+            return Ok(response);
+        }
+        [JwtAuthorize(RoleNames.Admin)]
         [HttpPut("{orderId:guid}/cancel")]
         public async Task<IActionResult> Cancel(Guid orderId)
         {
@@ -124,5 +141,6 @@ namespace ETicaret.API.Controllers
 
             return Ok(response);
         }
+
     }
 }

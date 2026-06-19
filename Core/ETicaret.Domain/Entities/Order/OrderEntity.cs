@@ -11,6 +11,9 @@ namespace ETicaret.Domain.Entities.Order
         public OrderStatus Status { get; set; } = OrderStatus.Pending;
         public decimal TotalPrice { get; set; }
         public string ShippingAddress { get; set; } = string.Empty;
+        public string? CargoCompany { get; set; }
+        public string? TrackingNumber { get; set; }
+        public DateTime? ShippedDate { get; set; }
         public ICollection<OrderItemEntity> Items { get; set; } = [];
         public ICollection<OrderStatusHistoryEntity> StatusHistories { get; set; } = [];
 

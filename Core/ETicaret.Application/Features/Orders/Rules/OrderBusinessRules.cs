@@ -91,5 +91,11 @@ namespace ETicaret.Application.Features.Orders.Rules
             if (!isValidTransition)
                 throw new BusinessRuleException(OrderErrors.InvalidOrderStatusTransition);
         }
+
+        public void OrderMustBeShippable(OrderEntity order)
+        {
+            if(order.Status!=OrderStatus.Paid && order.Status != OrderStatus.Preparing)
+                throw new BusinessRuleException(OrderErrors.OrderCannotBeShipped);
+        }
     }
 }
