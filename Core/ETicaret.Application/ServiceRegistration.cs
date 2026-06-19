@@ -4,6 +4,7 @@ using ETicaret.Application.Features.Auth.Rules;
 using ETicaret.Application.Features.Baskets.Rules;
 using ETicaret.Application.Features.Categories.Rules;
 using ETicaret.Application.Features.Orders.Rules;
+using ETicaret.Application.Features.Payments.Rules;
 using ETicaret.Application.Features.Products.Rules;
 using ETicaret.Application.Features.Users.Rules;
 using FluentValidation;
@@ -35,6 +36,7 @@ namespace ETicaret.Application
             services.AddScoped<IBasketBusinessRules, BasketBusinessRules>();
             services.AddScoped<IOrderBusinessRules, OrderBusinessRules>();
             services.AddScoped<IAddressBusinessRules, AddressBusinessRules>();
+            services.AddScoped<IPaymentBusinessRules, PaymentBusinessRules>();
 
         }
     }
