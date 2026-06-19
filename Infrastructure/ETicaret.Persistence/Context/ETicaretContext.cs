@@ -1,4 +1,5 @@
-﻿using ETicaret.Domain.Entities.Auth;
+﻿using ETicaret.Domain.Entities.Address;
+using ETicaret.Domain.Entities.Auth;
 using ETicaret.Domain.Entities.Basket;
 using ETicaret.Domain.Entities.Catalog;
 using ETicaret.Domain.Entities.Common;
@@ -24,6 +25,7 @@ namespace ETicaret.Persistence.Context
         public DbSet<OrderEntity> Orders { get; set; }
         public DbSet<OrderItemEntity> OrderItems { get; set; }
         public DbSet<OrderStatusHistoryEntity> OrderStatusHistories { get; set; }
+        public DbSet<AddressEntity> Addresses { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
