@@ -7,6 +7,7 @@ using ETicaret.Application.Features.Orders.Commands.UpdateOrderStatus;
 using ETicaret.Application.Features.Orders.Queries.GetMyOrders;
 using ETicaret.Application.Features.Orders.Queries.GetOrderById;
 using ETicaret.Application.Features.Orders.Queries.GetOrders;
+using ETicaret.Application.Features.Orders.Queries.GetOrderStatusHistory;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -108,6 +109,17 @@ namespace ETicaret.API.Controllers
             {
                 OrderId = orderId,
                 ChangedByUserId = userId.Value
+            });
+
+            return Ok(response);
+        }
+        [JwtAuthorize(RoleNames.Admin)]
+        [HttpGet("{orderId:guid}/history")]
+        public async Task<IActionResult> GetHistory(Guid orderId)
+        {
+            var response = await _mediator.Send(new GetOrderStatusHistoryQueryRequest
+            {
+                OrderId = orderId
             });
 
             return Ok(response);
