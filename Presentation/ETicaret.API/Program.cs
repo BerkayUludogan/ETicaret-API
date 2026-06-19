@@ -5,7 +5,7 @@ using ETicaret.Infrastructure;
 using ETicaret.Mapper;
 using ETicaret.Persistence;
 using ETicaret.Redis;
-
+using System.Text.Json.Serialization;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,7 +17,11 @@ builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddCustomMapper();
 builder.Services.AddPersistanceServices(builder.Configuration);
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+     .AddJsonOptions(options =>
+     {
+         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+     });
 builder.Services.AddRedisServices(builder.Configuration);
 
 #region Project Environments

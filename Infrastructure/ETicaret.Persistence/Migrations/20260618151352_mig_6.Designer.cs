@@ -4,6 +4,7 @@ using ETicaret.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ETicaret.Persistence.Migrations
 {
     [DbContext(typeof(ETicaretContext))]
-    partial class ETicaretContextModelSnapshot : ModelSnapshot
+    [Migration("20260618151352_mig_6")]
+    partial class mig_6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -491,45 +494,6 @@ namespace ETicaret.Persistence.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ETicaret.Domain.Entities.Order.OrderStatusHistoryEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasDefaultValueSql("newsequentialid()");
-
-                    b.Property<Guid?>("ChangedByUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("NewStatus")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OldStatus")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("OrderId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ChangedByUserId");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("OrderStatusHistories", (string)null);
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
@@ -714,24 +678,6 @@ namespace ETicaret.Persistence.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("ETicaret.Domain.Entities.Order.OrderStatusHistoryEntity", b =>
-                {
-                    b.HasOne("ETicaret.Domain.Entities.Identity.AppUserEntity", "ChangedByUser")
-                        .WithMany()
-                        .HasForeignKey("ChangedByUserId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("ETicaret.Domain.Entities.Order.OrderEntity", "Order")
-                        .WithMany("StatusHistories")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ChangedByUser");
-
-                    b.Navigation("Order");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.HasOne("ETicaret.Domain.Entities.Identity.AppRoleEntity", null)
@@ -798,8 +744,6 @@ namespace ETicaret.Persistence.Migrations
             modelBuilder.Entity("ETicaret.Domain.Entities.Order.OrderEntity", b =>
                 {
                     b.Navigation("Items");
-
-                    b.Navigation("StatusHistories");
                 });
 #pragma warning restore 612, 618
         }

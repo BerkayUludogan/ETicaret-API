@@ -3,6 +3,7 @@ using ETicaret.Domain.Entities.Basket;
 using ETicaret.Domain.Entities.Catalog;
 using ETicaret.Domain.Entities.Common;
 using ETicaret.Domain.Entities.Identity;
+using ETicaret.Domain.Entities.Order;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -19,7 +20,10 @@ namespace ETicaret.Persistence.Context
         public DbSet<ProductEntity> Products { get; set; }
         public DbSet<CategoryEntity> Categories { get; set; }
         public DbSet<BasketEntity> Baskets { get; set; }
-        public DbSet<BasketItemEntity> BasketItems{ get; set; }
+        public DbSet<BasketItemEntity> BasketItems { get; set; }
+        public DbSet<OrderEntity> Orders { get; set; }
+        public DbSet<OrderItemEntity> OrderItems { get; set; }
+        public DbSet<OrderStatusHistoryEntity> OrderStatusHistories { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)

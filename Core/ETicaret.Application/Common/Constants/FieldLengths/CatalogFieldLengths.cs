@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ETicaret.Application.Common.Constants.FieldLengths
+﻿namespace ETicaret.Application.Common.Constants.FieldLengths
 {
     public static class CatalogFieldLengths
     {
@@ -11,8 +7,8 @@ namespace ETicaret.Application.Common.Constants.FieldLengths
         public const int CategoryDescription = 500;
 
         public const int ProductName = 150;
+        public const int ProductSku = 80;
         public const int ProductSlug = 180;
         public const int ProductDescription = 1000;
-        public const int ProductSku = 80;
     }
 }
