@@ -48,6 +48,8 @@ namespace ETicaret.Application.Common.Exceptions
                 [OrderErrors.CompletedOrderStatusCannotBeChanged] = "Tamamlanmış veya iptal edilmiş siparişin durumu değiştirilemez.",
                 [OrderErrors.InvalidOrderStatusTransition] = "Sipariş durumu bu aşamaya geçirilemez.",
 
+                [AddressErrors.AddressNotFound] = "Adres bulunamadı."
+
             };
         public static string Get(string key)
             => Messages.TryGetValue(key, out var value)

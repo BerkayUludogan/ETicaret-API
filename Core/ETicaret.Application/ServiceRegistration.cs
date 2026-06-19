@@ -1,4 +1,5 @@
 ﻿using ETicaret.Application.Common.Behaviors;
+using ETicaret.Application.Features.Addresses.Rules;
 using ETicaret.Application.Features.Auth.Rules;
 using ETicaret.Application.Features.Baskets.Rules;
 using ETicaret.Application.Features.Categories.Rules;
@@ -33,6 +34,7 @@ namespace ETicaret.Application
             services.AddScoped<IProductBusinessRules, ProductBusinessRules>();
             services.AddScoped<IBasketBusinessRules, BasketBusinessRules>();
             services.AddScoped<IOrderBusinessRules, OrderBusinessRules>();
+            services.AddScoped<IAddressBusinessRules, AddressBusinessRules>();
 
         }
     }
