@@ -1,6 +1,7 @@
 using ETicaret.Application.Common.Exceptions;
 using ETicaret.Application.Common.Exceptions.Errors;
 using ETicaret.Application.Features.Orders.Rules;
+using ETicaret.Domain.Entities.Basket;
 using ETicaret.Domain.Entities.Order;
 using ETicaret.Domain.Enums;
 
@@ -67,4 +68,60 @@ public class OrderBusinessRulesTests
         Assert.Equal(422, exception.StatusCode);
         Assert.Contains(ErrorMessageResolver.Get(OrderErrors.OrderCannotBeShipped), exception.Errors);
     }
+
+    [Fact]
+    public void BasketMustNotBeEmpty_WhenBasketHasItems_ShouldNotThrow()
+    {
+        var basket = new BasketEntity
+        {
+            Items =
+        {
+            new BasketItemEntity()
+        }
+        };
+
+        var exception = Record.Exception(() => _rules.BasketMustNotBeEmpty(basket));
+
+        Assert.Null(exception);
+    }
+
+    [Fact]
+    public void BasketMustNotBeEmpty_WhenBasketHasNoItems_ShouldThrowBusinessRuleException()
+    {
+        var basket = new BasketEntity();
+
+        var exception = Assert.Throws<BusinessRuleException>(() =>
+            _rules.BasketMustNotBeEmpty(basket));
+
+        Assert.Equal(422, exception.StatusCode);
+        Assert.Contains(ErrorMessageResolver.Get(OrderErrors.BasketIsEmpty), exception.Errors);
+    }
+
+    [Theory]
+    [InlineData(10, 1)]
+    [InlineData(10, 10)]
+    public void ProductStockMustBeEnough_WhenStockIsEnough_ShouldNotThrow(
+        int stockQuantity,
+        int requestedQuantity)
+    {
+        var exception = Record.Exception(() =>
+            _rules.ProductStockMustBeEnough(stockQuantity, requestedQuantity));
+
+        Assert.Null(exception);
+    }
+
+    [Theory]
+    [InlineData(0, 1)]
+    [InlineData(5, 6)]
+    public void ProductStockMustBeEnough_WhenStockIsNotEnough_ShouldThrowBusinessRuleException(
+        int stockQuantity,
+        int requestedQuantity)
+    {
+        var exception = Assert.Throws<BusinessRuleException>(() =>
+            _rules.ProductStockMustBeEnough(stockQuantity, requestedQuantity));
+
+        Assert.Equal(422, exception.StatusCode);
+        Assert.Contains(ErrorMessageResolver.Get(OrderErrors.ProductStockNotEnough), exception.Errors);
+    }
+
 }
