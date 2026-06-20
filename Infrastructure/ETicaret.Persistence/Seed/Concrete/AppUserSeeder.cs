@@ -30,10 +30,11 @@ namespace ETicaret.Persistence.Seed.Concrete
                     PhoneNumberConfirmed = false,
                     SecurityStamp = Guid.NewGuid().ToString("D"),
                     CreatedDate = DateTime.UtcNow,
-                    IsActive = true,
+                    IsActive = true
                 };
 
                 adminUser.PasswordHash = hasher.HashPassword(adminUser, "123456");
+
                 context.Set<AppUserEntity>().Add(adminUser);
                 context.SaveChanges();
             }
@@ -44,10 +45,10 @@ namespace ETicaret.Persistence.Seed.Concrete
             if (adminRole is null)
                 return;
 
-            var userHasAdminRole = context.Set<IdentityUserRole<Guid>>()
+            var adminUserHasRole = context.Set<IdentityUserRole<Guid>>()
                 .Any(x => x.UserId == adminUser.Id && x.RoleId == adminRole.Id);
 
-            if (userHasAdminRole)
+            if (adminUserHasRole)
                 return;
 
             context.Set<IdentityUserRole<Guid>>().Add(new IdentityUserRole<Guid>

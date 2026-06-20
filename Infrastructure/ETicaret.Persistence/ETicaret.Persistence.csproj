@@ -21,8 +21,4 @@
     <ProjectReference Include="..\..\Core\ETicaret.Application\ETicaret.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Seed\SeedData\" />
-  </ItemGroup>
-
 </Project>
