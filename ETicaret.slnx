@@ -13,4 +13,7 @@
   <Folder Name="/Presentation/">
     <Project Path="Presentation/ETicaret.API/ETicaret.API.csproj" />
   </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="Tests/ETicaret.Tests/ETicaret.Tests.csproj" />
+  </Folder>
 </Solution>
