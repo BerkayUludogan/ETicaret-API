@@ -1,44 +1,49 @@
-﻿//using ETicaret.Application.Common.Enums;
-//using ETicaret.Domain.Entities.Identity;
-//using ETicaret.Persistence.Seed.Abstract;
-//using Microsoft.EntityFrameworkCore;
+using ETicaret.Application.Common.CustomAttributes;
+using ETicaret.Application.Common.Enums;
+using ETicaret.Domain.Entities.Identity;
+using ETicaret.Persistence.Seed.Abstract;
+using Microsoft.EntityFrameworkCore;
 
-//namespace ETicaret.Persistence.Seed.Concrete
-//{
+namespace ETicaret.Persistence.Seed.Concrete
+{
+    [SeedOrder(1)]
+    public class AppRoleSeeder : ISeeder
+    {
+        public void Seed(DbContext context)
+        {
+            SeedRole(
+                context,
+                RoleNames.Admin,
+                "Yonetici rolu, tum sistem yonetim yetkilerine sahip");
 
-//    public class AppRoleSeeder : ISeeder
-//    {
-//        public void Seed(DbContext context)
-//        {
-//            if (!context.Set<AppRoleEntity>()
-//                 .Any(x => x.Name == RoleNames.Admin.ToString() && x.Name == RoleNames.Customer.ToString()))
-//            {
-//                AppRoleEntity adminRole = new()
-//                {
-//                    Id = Guid.NewGuid(),
-//                    Name = RoleNames.Admin.ToString(),
-//                    NormalizedName = "ADMIN",
-//                    Description = "Yönetici rolü, tüm sistem yönetim yetkilerine sahip",
-//                    IsActive = true,
-//                    ConcurrencyStamp = Guid.NewGuid().ToString("D"),
-//                    CreatedDate = DateTime.Now,
-//                };
-//                AppRoleEntity customerRole = new()
-//                {
-//                    Id = Guid.NewGuid(),
-//                    Name = RoleNames.Customer.ToString(),
-//                    NormalizedName = "CUSTOMER",
-//                    Description = "Müşteri",
-//                    IsActive = true,
-//                    ConcurrencyStamp = Guid.NewGuid().ToString("D"),
-//                    CreatedDate = DateTime.Now,
-//                };
+            SeedRole(
+                context,
+                RoleNames.Customer,
+                "Musteri rolu");
 
+            context.SaveChanges();
+        }
 
+        private static void SeedRole(DbContext context, string roleName, string description)
+        {
+            var roleExists = context.Set<AppRoleEntity>()
+                .Any(x => x.NormalizedName == roleName);
 
-//                context.Set<AppRoleEntity>().AddRange( customerRole);
-//                context.SaveChanges();
-//            }
-//        }
-//    }
-//}
+            if (roleExists)
+                return;
+
+            var role = new AppRoleEntity
+            {
+                Id = Guid.NewGuid(),
+                Name = roleName,
+                NormalizedName = roleName,
+                Description = description,
+                IsActive = true,
+                ConcurrencyStamp = Guid.NewGuid().ToString("D"),
+                CreatedDate = DateTime.UtcNow
+            };
+
+            context.Set<AppRoleEntity>().Add(role);
+        }
+    }
+}
