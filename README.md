@@ -317,15 +317,15 @@ cd ETicaret-API
 Gerekli ortamlar:
 
 - .NET 10 SDK
-- SQL Server
-- Redis
+- Docker Desktop
+- SQL Server ve Redis icin Docker Compose
 
 `Presentation/ETicaret.API/appsettings.Development.json` veya local configuration dosyanizdaki degerleri kendi ortaminiza gore duzenleyin:
 
 ```json
 {
   "ConnectionStrings": {
-    "SQLServer": "Server=.;Database=ETicaretDb;Trusted_Connection=True;TrustServerCertificate=True"
+    "DefaultConnection": "Server=localhost,1433;Database=ETicaretDb;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True"
   },
   "JWT": {
     "Audience": "your-audience",
@@ -340,6 +340,41 @@ Gerekli ortamlar:
   }
 }
 ```
+
+## Docker ile Local Ortam
+
+Docker Compose bu projede API'nin ihtiyac duydugu dis servisleri tek komutla calistirmak icin kullanilir. Bu sayede SQL Server ve Redis'i bilgisayara ayri ayri kurmadan, izole container'lar olarak ayaga kaldirabilirsiniz.
+
+Bu projede Docker Compose su servisleri calistirir:
+
+- SQL Server: `localhost,1433`
+- Redis: `localhost:6379`
+
+Servisleri baslatmak icin:
+
+```bash
+docker compose up -d
+```
+
+Calisan container'lari kontrol etmek icin:
+
+```bash
+docker ps
+```
+
+Servisleri durdurmak icin:
+
+```bash
+docker compose down
+```
+
+Veritabani dahil tum volume verilerini silmek icin:
+
+```bash
+docker compose down -v
+```
+
+> `docker compose down -v` komutu SQL Server icindeki local veritabani verilerini de siler. Sadece sifirdan kurulum test etmek istediginizde kullanin.
 
 Veritabanini olusturmak icin migrationlari uygulayin:
 
@@ -364,6 +399,25 @@ Swagger arayuzu development ortaminda aktif olur:
 
 ```txt
 https://localhost:7044/swagger
+```
+
+## Seed Data
+
+Uygulama baslarken local development icin temel demo verileri eklenir. Seeder'lar tekrar calistiginda ayni veriyi yeniden eklememek icin role, email, slug ve SKU kontrolleri yapar.
+
+Eklenen temel veriler:
+
+- `ADMIN` ve `CUSTOMER` rolleri
+- Admin kullanicisi
+- Demo kategoriler: Elektronik, Telefon, Bilgisayar, Giyim
+- Demo urunler: iPhone 15, Samsung Galaxy S24, MacBook Air M2, Lenovo IdeaPad 15, Erkek Basic T-Shirt
+
+Demo admin kullanicisi:
+
+```txt
+Email: admin@gmail.com
+Password: 123456
+Role: ADMIN
 ```
 
 ## Ornek Endpointler
@@ -422,12 +476,12 @@ Tamamlanan ana moduller:
 - Address
 - Payment
 - Shipping
+- Docker Compose ile local SQL Server ve Redis
+- Demo seed data
 
 Planlanan gelistirmeler:
 
 - Unit ve integration testler
-- Docker Compose destegi
 - README icin ekran goruntuleri veya mimari gorsel
-- Daha kapsamli seed data
 - Notification/email altyapisi
 - Gercek payment provider entegrasyonu

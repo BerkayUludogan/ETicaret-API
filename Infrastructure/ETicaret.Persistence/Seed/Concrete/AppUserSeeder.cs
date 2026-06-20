@@ -30,11 +30,11 @@ namespace ETicaret.Persistence.Seed.Concrete
                     PhoneNumberConfirmed = false,
                     SecurityStamp = Guid.NewGuid().ToString("D"),
                     CreatedDate = DateTime.UtcNow,
-                    IsActive = true,
-
+                    IsActive = true
                 };
 
                 adminUser.PasswordHash = hasher.HashPassword(adminUser, "123456");
+
                 context.Set<AppUserEntity>().Add(adminUser);
                 context.SaveChanges();
             }

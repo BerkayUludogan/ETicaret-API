@@ -11,15 +11,8 @@ namespace ETicaret.Persistence.Seed.Concrete
     {
         public void Seed(DbContext context)
         {
-            SeedRole(
-                context,
-                RoleNames.Admin,
-                "Yonetici rolu, tum sistem yonetim yetkilerine sahip");
-
-            SeedRole(
-                context,
-                RoleNames.Customer,
-                "Musteri rolu");
+            SeedRole(context, RoleNames.Admin, "Admin role with system management permissions");
+            SeedRole(context, RoleNames.Customer, "Customer role");
 
             context.SaveChanges();
         }
