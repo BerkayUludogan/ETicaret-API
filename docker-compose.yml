@@ -1,0 +1,23 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: eticaret-sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "YourStrong!Passw0rd"
+    ports:
+      - "1433:1433"
+    volumes:
+      - eticaret_sqlserver_data:/var/opt/mssql
+
+  redis:
+    image: redis:7.4-alpine
+    container_name: eticaret-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - eticaret_redis_data:/data
+
+volumes:
+  eticaret_sqlserver_data:
+  eticaret_redis_data:
